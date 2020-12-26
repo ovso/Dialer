@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "707973490418",
+    "project_id": "dialer-54664",
+    "storage_bucket": "dialer-54664.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:707973490418:android:c1d4171284b01abb3d526b",
+        "android_client_info": {
+          "package_name": "io.github.ovso.dialer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "707973490418-dq0d3fe9khl2dq21nn1611trmlkagr81.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvB9CvuYQ8GsQ9h66EoWZ_DQWzUxX9An0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "707973490418-dq0d3fe9khl2dq21nn1611trmlkagr81.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

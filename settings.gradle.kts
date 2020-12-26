@@ -1,2 +1,2 @@
 rootProject.name = "Dialer"
-include ':app'
+include("app")
