@@ -4,6 +4,7 @@
   package="io.github.ovso.dialer">
 
   <application
+    android:name=".app.DialerApplication"
     android:allowBackup="false"
     android:icon="@mipmap/ic_launcher"
     android:label="@string/app_name"

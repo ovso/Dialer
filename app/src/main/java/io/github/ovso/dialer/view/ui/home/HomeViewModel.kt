@@ -1,13 +1,16 @@
 package io.github.ovso.dialer.view.ui.home
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel @ViewModelInject constructor(
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-    val text: LiveData<String> = _text
+) : ViewModel() {
+
+  private val _text = MutableLiveData<String>().apply {
+    value = "This is home Fragment"
+  }
+  val text: LiveData<String> = _text
 }

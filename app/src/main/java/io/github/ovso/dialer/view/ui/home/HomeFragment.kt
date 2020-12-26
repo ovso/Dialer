@@ -5,10 +5,12 @@ import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import io.github.ovso.dialer.R
 import io.github.ovso.dialer.databinding.FragmentHomeBinding
 import io.github.ovso.dialer.view.base.DataBindingFragment
 
+@AndroidEntryPoint
 class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
   override val viewModel: HomeViewModel by viewModels()
 
