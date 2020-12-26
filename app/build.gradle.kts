@@ -128,6 +128,12 @@ dependencies {
   // initializer
   implementation("androidx.startup:startup-runtime:1.0.0")
 
+  // database
+  implementation("androidx.room:room-runtime:${Versions.room}")
+  kapt("androidx.room:room-compiler:${Versions.room}")
+  implementation("androidx.room:room-ktx:${Versions.room}")
+  implementation("androidx.room:room-rxjava2:${Versions.room}")
+
   testImplementation("junit:junit:4.13.1")
   androidTestImplementation("androidx.test.ext:junit:1.1.2")
   androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
