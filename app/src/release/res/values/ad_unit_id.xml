@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="ad_app_id"></string>
+  <string name="ad_banner_unit_id"></string>
+  <string name="ad_interstitial_unit_id"></string>
+</resources>
