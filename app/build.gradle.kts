@@ -123,6 +123,9 @@ dependencies {
 
   // log
   implementation("com.orhanobut:logger:2.2.0")
+  implementation("com.jakewharton.timber:timber:4.7.1")
+
+  // initializer
   implementation("androidx.startup:startup-runtime:1.0.0")
 
   testImplementation("junit:junit:4.13.1")
