@@ -21,8 +21,14 @@
       android:layout_height="match_parent"
       tools:context=".view.ui.main.MainActivity">
 
-      <include layout="@layout/layout_toolbar" />
+      <include layout="@layout/layout_toolbar"
+        android:id="@+id/includeToolbar"/>
 
+      <Button
+        android:id="@+id/button_home"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView
