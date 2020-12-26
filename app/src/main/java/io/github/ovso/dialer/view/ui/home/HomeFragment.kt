@@ -1,13 +1,16 @@
 package io.github.ovso.dialer.view.ui.home
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.ovso.dialer.R
 import io.github.ovso.dialer.databinding.FragmentHomeBinding
+import io.github.ovso.dialer.databinding.ViewHomeAddDialogBinding
 import io.github.ovso.dialer.view.base.DataBindingFragment
 
 @AndroidEntryPoint
@@ -24,6 +27,33 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     setupToolbarAndDrawer()
+    addEvent()
+    observe()
+  }
+
+  private fun observe() {
+    val owner = viewLifecycleOwner
+    viewModel.showAddDialog.observe(owner) {
+      showAddDialog(it)
+    }
+  }
+
+  private fun showAddDialog(listener: ((String) -> Unit)?) {
+    val binding = ViewHomeAddDialogBinding.inflate(requireActivity().layoutInflater)
+    val onOkClick = DialogInterface.OnClickListener { dialog, _ ->
+      dialog.dismiss()
+      listener?.invoke(binding.root.text.trim().toString())
+    }
+    AlertDialog.Builder(requireContext()).apply {
+      setTitle(R.string.home_group_add_dialog_msg)
+      setView(binding.root)
+      setPositiveButton(android.R.string.ok, onOkClick)
+      setNegativeButton(android.R.string.cancel, null)
+      show()
+    }
+  }
+
+  private fun addEvent() {
   }
 
   private fun setupToolbarAndDrawer() {

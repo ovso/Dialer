@@ -4,6 +4,7 @@
   xmlns:tools="http://schemas.android.com/tools">
 
   <data>
+
     <variable
       name="viewModel"
       type="io.github.ovso.dialer.view.ui.home.HomeViewModel" />
@@ -21,14 +22,19 @@
       android:layout_height="match_parent"
       tools:context=".view.ui.main.MainActivity">
 
-      <include layout="@layout/layout_toolbar"
-        android:id="@+id/includeToolbar"/>
+      <include
+        android:id="@+id/includeToolbar"
+        layout="@layout/layout_toolbar" />
 
-      <Button
-        android:id="@+id/button_home"
-        android:layout_gravity="center"
+      <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_home"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:onClick="@{() -> viewModel.onFabClick()}"
+        app:icon="@drawable/ic_add" />
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -38,5 +44,6 @@
       android:layout_gravity="start"
       app:headerLayout="@layout/nav_header_main"
       app:menu="@menu/activity_main_drawer" />
+
   </androidx.drawerlayout.widget.DrawerLayout>
 </layout>
