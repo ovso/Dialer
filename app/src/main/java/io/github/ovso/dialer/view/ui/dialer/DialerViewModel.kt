@@ -34,8 +34,8 @@ class DialerViewModel @ViewModelInject constructor() : ViewModel() {
   private fun onItemClick(item: DialerItemModel) {
     Logger.d("item: $item")
     when (item.footer) {
-      true -> _showEditDialog.value = item
-      else -> _showAddDialog.value = item
+      true -> _showAddDialog.value = item
+      else -> _showEditDialog.value = item
     }
   }
 }
