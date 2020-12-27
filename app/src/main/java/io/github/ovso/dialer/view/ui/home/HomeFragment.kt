@@ -7,17 +7,24 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
+import com.google.android.material.tabs.TabLayoutMediator
+import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.ovso.dialer.R
 import io.github.ovso.dialer.databinding.FragmentHomeBinding
 import io.github.ovso.dialer.databinding.ViewHomeAddDialogBinding
 import io.github.ovso.dialer.view.base.DataBindingFragment
+import io.github.ovso.dialer.view.ui.home.adapter.HomePagerAdapter
 
 @AndroidEntryPoint
 class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
   override val viewModel: HomeViewModel by viewModels()
 
   private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
+
+  private val adapter by lazy {
+    HomePagerAdapter(this)
+  }
 
   override fun onStart() {
     super.onStart()
@@ -29,12 +36,29 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
     setupToolbarAndDrawer()
     addEvent()
     observe()
+    setupVp()
+    setupTabsAndVp()
+  }
+
+  private fun setupTabsAndVp() {
+    TabLayoutMediator(binding.tabs, binding.vpHome) { tabs, position ->
+      Logger.d("text: ${adapter.items[position]}")
+      tabs.text = adapter.items[position]
+    }.attach()
+  }
+
+  private fun setupVp() {
+    binding.vpHome.adapter = adapter
   }
 
   private fun observe() {
     val owner = viewLifecycleOwner
     viewModel.showAddDialog.observe(owner) {
       showAddDialog(it)
+    }
+    viewModel.addTab.observe(owner) {
+      adapter.items.add(it)
+      adapter.notifyDataSetChanged()
     }
   }
 

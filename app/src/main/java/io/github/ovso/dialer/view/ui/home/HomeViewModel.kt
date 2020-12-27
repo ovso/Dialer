@@ -18,9 +18,13 @@ class HomeViewModel @ViewModelInject constructor(
   private val _showAddDialog = MutableLiveData<((String) -> Unit)>()
   val showAddDialog: LiveData<((String) -> Unit)> get() = _showAddDialog
 
+  private val _addTab = MutableLiveData<String>()
+  val addTab: LiveData<String> get() = _addTab
+
   fun onFabClick() {
     _showAddDialog.value = { text ->
       Logger.d("text: $text")
+      _addTab.value = text
     }
   }
 
