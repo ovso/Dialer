@@ -8,7 +8,7 @@
     android:layout_width="0dp"
     android:layout_height="0dp"
     android:backgroundTint="@android:color/darker_gray"
-    app:cardCornerRadius="20dp"
+    app:cardCornerRadius="200dp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintDimensionRatio="v,1:1"
     app:layout_constraintEnd_toEndOf="parent"
@@ -18,7 +18,8 @@
     <TextView
       android:id="@+id/tv_dialer_item_name"
       android:layout_width="match_parent"
-      android:layout_height="match_parent" />
+      android:layout_height="match_parent"
+      android:gravity="center" />
 
   </androidx.cardview.widget.CardView>
 

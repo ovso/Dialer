@@ -2,7 +2,6 @@ package io.github.ovso.dialer.view.ui.dialer.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +10,8 @@ import io.github.ovso.dialer.databinding.ItemDialerBinding
 import io.github.ovso.dialer.databinding.ItemDialerFooterBinding
 
 class DialerAdapter : ListAdapter<DialerItemModel, RecyclerView.ViewHolder>(diffCallback) {
+
+  var itemClickListener: ((DialerItemModel) -> Unit)? = null
 
   companion object {
     val diffCallback = object : DiffUtil.ItemCallback<DialerItemModel>() {
@@ -26,14 +27,17 @@ class DialerAdapter : ListAdapter<DialerItemModel, RecyclerView.ViewHolder>(diff
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
     when (viewType == VIEW_TYPE_FOOTER) {
-      true -> DialerFooterViewHolder.create(parent)
-      else -> DialerViewHolder.create(parent)
+      true -> DialerFooterViewHolder.create(parent).apply {
+        this.clickListener = itemClickListener
+      }
+      else -> DialerViewHolder.create(parent).apply {
+        this.clickListener = itemClickListener
+      }
     }
 
   override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
     @Suppress("UNCHECKED_CAST")
     (holder as OnBind<DialerItemModel>).onBindViewHolder(getItem(position))
-
   }
 
   override fun getItemViewType(position: Int): Int =
@@ -47,8 +51,15 @@ class DialerViewHolder private constructor(
   private val binding: ItemDialerBinding
 ) : RecyclerView.ViewHolder(binding.root), OnBind<DialerItemModel> {
 
+  var clickListener: ((DialerItemModel) -> Unit)? = null
+
   override fun onBindViewHolder(item: DialerItemModel) {
-    binding.tvDialerItemName.text = item.name
+    binding.apply {
+      tvDialerItemName.text = item.name
+      root.setOnClickListener {
+        clickListener?.invoke(item)
+      }
+    }
   }
 
   companion object {
@@ -57,7 +68,6 @@ class DialerViewHolder private constructor(
         ItemDialerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
       )
     }
-
   }
 }
 
@@ -65,9 +75,11 @@ class DialerFooterViewHolder private constructor(
   private val binding: ItemDialerFooterBinding
 ) : RecyclerView.ViewHolder(binding.root), OnBind<DialerItemModel> {
 
+  var clickListener: ((DialerItemModel) -> Unit)? = null
+
   override fun onBindViewHolder(item: DialerItemModel) {
     binding.root.setOnClickListener {
-      Toast.makeText(it.context, "create", Toast.LENGTH_SHORT).show()
+      clickListener?.invoke(item)
     }
   }
 

@@ -2,6 +2,7 @@ package io.github.ovso.dialer.view.ui.dialer
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.ovso.dialer.R
@@ -17,7 +18,6 @@ class DialerFragment : DataBindingFragment<FragmentDialerBinding>(R.layout.fragm
   private val adapter by lazy { DialerAdapter() }
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    setupRv()
     observe()
   }
 
@@ -26,10 +26,26 @@ class DialerFragment : DataBindingFragment<FragmentDialerBinding>(R.layout.fragm
     viewModel.items.observe(owner) {
       adapter.submitList(it)
     }
-  }
+    viewModel.setupAdapter.observe(owner) { listener ->
+      binding.rvDialer.apply {
+        adapter = this@DialerFragment.adapter.apply { itemClickListener = listener }
+        addItemDecoration(GridItemDecoration(resources.displayMetrics))
+      }
+    }
 
-  private fun setupRv() {
-    binding.rvDialer.adapter = adapter
+    viewModel.showEditDialog.observe(owner) {
+      AlertDialog.Builder(requireContext()).apply {
+        setMessage("수정 팝업")
+        show()
+      }
+    }
+
+    viewModel.showAddDialog.observe(owner) {
+      AlertDialog.Builder(requireContext()).apply {
+        setMessage("추가 팝업")
+        show()
+      }
+    }
   }
 
   companion object {
