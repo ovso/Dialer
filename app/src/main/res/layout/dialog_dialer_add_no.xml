@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
+
+  <EditText
+    android:id="@+id/et_dialer_add_dialog_no"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:importantForAutofill="no"
+    android:inputType="text"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:ignore="LabelFor" />
+
+  <EditText
+    android:id="@+id/et_dialer_add_dialog_nm"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:importantForAutofill="no"
+    android:inputType="text"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/et_dialer_add_dialog_no"
+    tools:ignore="LabelFor" />
+
+  <com.google.android.material.chip.ChipGroup
+    android:id="@+id/cg_dialer_add_dialog"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/et_dialer_add_dialog_nm">
+
+    <com.google.android.material.chip.Chip
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:chipBackgroundColor="@color/black" />
+
+    <com.google.android.material.chip.Chip
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:chipBackgroundColor="@android:color/darker_gray" />
+
+    <com.google.android.material.chip.Chip
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:chipBackgroundColor="@android:color/holo_red_dark" />
+
+  </com.google.android.material.chip.ChipGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

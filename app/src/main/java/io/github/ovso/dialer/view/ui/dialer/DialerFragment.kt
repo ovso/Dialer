@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.ovso.dialer.R
+import io.github.ovso.dialer.databinding.DialogDialerAddNoBinding
 import io.github.ovso.dialer.databinding.FragmentDialerBinding
 import io.github.ovso.dialer.view.base.DataBindingFragment
 import io.github.ovso.dialer.view.ui.dialer.adapter.DialerAdapter
@@ -41,8 +42,11 @@ class DialerFragment : DataBindingFragment<FragmentDialerBinding>(R.layout.fragm
     }
 
     viewModel.showAddDialog.observe(owner) {
+      val binding = DialogDialerAddNoBinding.inflate(requireActivity().layoutInflater)
+
       AlertDialog.Builder(requireContext()).apply {
-        setMessage("추가 팝업")
+        setMessage("번호를 추가해주세요.")
+        setView(binding.root)
         show()
       }
     }

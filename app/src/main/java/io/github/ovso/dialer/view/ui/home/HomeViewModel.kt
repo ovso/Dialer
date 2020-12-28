@@ -24,8 +24,7 @@ class HomeViewModel @ViewModelInject constructor(
   fun onFabClick() {
     _showAddDialog.value = { text ->
       Logger.d("text: $text")
-      _addTab.value = text
+      _addTab.value = if (text.isNotEmpty()) text else "?"
     }
   }
-
 }

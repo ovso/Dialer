@@ -11,8 +11,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.ovso.dialer.R
+import io.github.ovso.dialer.databinding.DialogHomeAddGroupBinding
 import io.github.ovso.dialer.databinding.FragmentHomeBinding
-import io.github.ovso.dialer.databinding.ViewHomeAddDialogBinding
 import io.github.ovso.dialer.view.base.DataBindingFragment
 import io.github.ovso.dialer.view.ui.home.adapter.HomePagerAdapter
 
@@ -63,7 +63,7 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
   }
 
   private fun showAddDialog(listener: ((String) -> Unit)?) {
-    val binding = ViewHomeAddDialogBinding.inflate(requireActivity().layoutInflater)
+    val binding = DialogHomeAddGroupBinding.inflate(requireActivity().layoutInflater)
     val onOkClick = DialogInterface.OnClickListener { dialog, _ ->
       dialog.dismiss()
       listener?.invoke(binding.root.text.trim().toString())
