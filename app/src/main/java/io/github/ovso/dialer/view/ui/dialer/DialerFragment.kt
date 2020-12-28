@@ -47,6 +47,8 @@ class DialerFragment : DataBindingFragment<FragmentDialerBinding>(R.layout.fragm
       AlertDialog.Builder(requireContext()).apply {
         setMessage("번호를 추가해주세요.")
         setView(binding.root)
+        setPositiveButton(android.R.string.ok, null)
+        setNegativeButton(android.R.string.cancel, null)
         show()
       }
     }
