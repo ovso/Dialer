@@ -135,6 +135,8 @@ dependencies {
   implementation("androidx.room:room-ktx:${Versions.room}")
   implementation("androidx.room:room-rxjava2:${Versions.room}")
 
+  implementation(project(":colorpicker"))
+
   testImplementation("junit:junit:4.13.1")
   androidTestImplementation("androidx.test.ext:junit:1.1.2")
   androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")

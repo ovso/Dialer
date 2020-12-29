@@ -27,29 +27,13 @@
     app:layout_constraintTop_toBottomOf="@id/et_dialer_add_dialog_no"
     tools:ignore="LabelFor" />
 
-  <com.google.android.material.chip.ChipGroup
-    android:id="@+id/cg_dialer_add_dialog"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+
+  <io.github.ovso.colorpicker.EasyColorPicker
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    app:bgColor="#000000"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/et_dialer_add_dialog_nm">
-
-    <com.google.android.material.chip.Chip
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      app:chipBackgroundColor="@color/black" />
-
-    <com.google.android.material.chip.Chip
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      app:chipBackgroundColor="@android:color/darker_gray" />
-
-    <com.google.android.material.chip.Chip
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      app:chipBackgroundColor="@android:color/holo_red_dark" />
-
-  </com.google.android.material.chip.ChipGroup>
+    app:layout_constraintTop_toBottomOf="@id/et_dialer_add_dialog_nm" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

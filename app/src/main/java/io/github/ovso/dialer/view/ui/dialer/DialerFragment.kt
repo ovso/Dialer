@@ -1,6 +1,8 @@
 package io.github.ovso.dialer.view.ui.dialer
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels

@@ -11,6 +11,7 @@
         android:paddingBottom="40dp"
         app:exampleDimension="24sp"
         app:exampleDrawable="@android:drawable/ic_menu_add"
+        app:bgColor="@color/light_blue_400"
         app:exampleString="Hello, EasyColorPicker" />
 
 </FrameLayout>
