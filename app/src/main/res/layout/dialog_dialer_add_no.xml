@@ -6,7 +6,7 @@
   android:layout_height="wrap_content">
 
   <EditText
-    android:id="@+id/et_dialer_add_dialog_no"
+    android:id="@+id/et_add_dialog_no"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:importantForAutofill="no"
@@ -17,23 +17,24 @@
     tools:ignore="LabelFor" />
 
   <EditText
-    android:id="@+id/et_dialer_add_dialog_nm"
+    android:id="@+id/et_add_dialog_nm"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:importantForAutofill="no"
     android:inputType="text"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/et_dialer_add_dialog_no"
+    app:layout_constraintTop_toBottomOf="@id/et_add_dialog_no"
     tools:ignore="LabelFor" />
 
 
   <io.github.ovso.colorpicker.EasyColorPicker
+    android:id="@+id/picker_add_dialog"
     android:layout_width="100dp"
     android:layout_height="100dp"
-    app:bgColor="#000000"
+    app:bgColor="#cccccc"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/et_dialer_add_dialog_nm" />
+    app:layout_constraintTop_toBottomOf="@id/et_add_dialog_nm" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
