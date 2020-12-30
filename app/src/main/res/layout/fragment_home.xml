@@ -61,6 +61,13 @@
         android:onClick="@{() -> viewModel.onFabClick()}"
         app:icon="@drawable/ic_add" />
 
+
+      <io.github.ovso.colorpicker.EasyColorPicker
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView

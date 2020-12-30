@@ -24,7 +24,7 @@ class GridItemDecoration(displayMetrics: DisplayMetrics) : ItemDecoration() {
     val lastRow = (maxCount - 1) / spanCount
     outRect.left = column * spacing / spanCount
     outRect.right = spacing - (column + 1) * spacing / spanCount
-    outRect.top = spacing * 2
+    outRect.top = spacing * 1
     if (row == lastRow) {
       outRect.bottom = outerMargin
     }
@@ -38,7 +38,7 @@ class GridItemDecoration(displayMetrics: DisplayMetrics) : ItemDecoration() {
     ).toInt()
     outerMargin = TypedValue.applyDimension(
       TypedValue.COMPLEX_UNIT_DIP,
-      50f,
+      10f,
       displayMetrics
     ).toInt()
   }
