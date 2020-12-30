@@ -32,7 +32,7 @@ class EasyColorPicker @JvmOverloads constructor(
       Log.d("EasyColorPicker", "set color")
     }
 
-  var colors: IntArray = intArrayOf(0, 1, 2, 3, 4, 5)
+  var colors: IntArray = intArrayOf(0x000000, 0xFFFFFF, 0xCCCCCC, 0x234CF, 0x000000, 0x000000)
 
   init {
     init(attrs, defStyle)
