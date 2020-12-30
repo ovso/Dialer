@@ -2,6 +2,7 @@ package io.github.ovso.colorpicker
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.annotation.ColorRes
@@ -28,9 +29,10 @@ class EasyColorPicker @JvmOverloads constructor(
     set(value) {
       field = value
       binding.root.setBackgroundColor(value!!)
+      Log.d("EasyColorPicker", "set color")
     }
 
-  var colors: Array<Int> = arrayOf(0, 1, )
+  var colors: IntArray = intArrayOf(0, 1, 2, 3, 4, 5)
 
   init {
     init(attrs, defStyle)
@@ -41,7 +43,14 @@ class EasyColorPicker @JvmOverloads constructor(
       attrs, R.styleable.EasyColorPicker, defStyle, 0
     )
     color = typeArray.getInt(R.styleable.EasyColorPicker_bgColor, 0x000000)
+
     binding.root.setBackgroundColor(color!!)
+    Log.d("EasyColorPicker", "init")
+    binding.rv.addItemDecoration(
+      GridItemDecoration(
+        context.resources.displayMetrics
+      )
+    )
     binding.rv.adapter = colorAdapter
     colorAdapter.submitList(colors.toList())
     typeArray.recycle()

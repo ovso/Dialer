@@ -4,16 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.ovso.dialer.R
 import io.github.ovso.dialer.databinding.DialogDialerAddNoBinding
 import io.github.ovso.dialer.databinding.FragmentDialerBinding
 import io.github.ovso.dialer.view.base.DataBindingFragment
 import io.github.ovso.dialer.view.ui.dialer.adapter.DialerAdapter
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DialerFragment : DataBindingFragment<FragmentDialerBinding>(R.layout.fragment_dialer) {
@@ -47,11 +43,6 @@ class DialerFragment : DataBindingFragment<FragmentDialerBinding>(R.layout.fragm
 
     viewModel.showAddDialog.observe(owner) {
       val binding = DialogDialerAddNoBinding.inflate(requireActivity().layoutInflater)
-      viewLifecycleOwner.lifecycleScope.launch {
-        delay(3000)
-        binding.pickerAddDialog.color = requireContext().getColor(R.color.design_default_color_primary_dark)
-      }
-
       AlertDialog.Builder(requireContext()).apply {
         setMessage("번호를 추가해주세요.")
         setView(binding.root)

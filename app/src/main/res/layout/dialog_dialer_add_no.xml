@@ -30,8 +30,8 @@
 
   <io.github.ovso.colorpicker.EasyColorPicker
     android:id="@+id/picker_add_dialog"
-    android:layout_width="100dp"
-    android:layout_height="100dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     app:bgColor="#cccccc"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
