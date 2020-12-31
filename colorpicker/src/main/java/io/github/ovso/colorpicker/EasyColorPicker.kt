@@ -22,7 +22,24 @@ class EasyColorPicker @JvmOverloads constructor(
     ViewEasyColorPickerBinding.inflate(LayoutInflater.from(context), this, true)
   }
 
-  private val colorAdapter by lazy { ColorAdapter() }
+  private val colorAdapter by lazy {
+    ColorAdapter().apply {
+      onItemClickListener = { index ->
+        Log.d("colorAdapter", "index: $index")
+        val newItems = items?.map {
+          it.copy(check = false)
+        }?.toMutableList()
+
+        newItems?.get(index)?.copy(check = true)?.let {
+          newItems.set(index, it)
+        }
+        items = newItems
+        submitList(items)
+
+        checkIndex = index
+      }
+    }
+  }
 
   @ColorRes
   var color: Int? = null
@@ -32,11 +49,21 @@ class EasyColorPicker @JvmOverloads constructor(
       Log.d("EasyColorPicker", "set color")
     }
 
+  var items: List<ColorModel>? = null
+
+  var checkIndex: Int = 0
+
   var colors: List<String>? = null
     set(value) {
       field = value
-      colorAdapter.submitList(colors?.toList())
-//      requestLayout()
+      items = value?.mapIndexed { index, color ->
+        when (index == checkIndex) {
+          true -> ColorModel(color = color, check = true)
+          else -> ColorModel(color = color)
+        }
+
+      }
+      colorAdapter.submitList(items)
     }
 
   init {
@@ -47,18 +74,17 @@ class EasyColorPicker @JvmOverloads constructor(
     val typeArray = context.obtainStyledAttributes(
       attrs, R.styleable.EasyColorPicker, defStyle, 0
     )
-//    color = typeArray.getInt(R.styleable.EasyColorPicker_colors, 0x000000)
-
-//    binding.root.setBackgroundColor(color!!)
-    Log.d("EasyColorPicker", "init")
-    binding.rv.addItemDecoration(
-      GridItemDecoration(
-        context.resources.displayMetrics
+    binding.rv.apply {
+      itemAnimator = null
+      addItemDecoration(
+        GridItemDecoration(
+          context.resources.displayMetrics
+        )
       )
-    )
-    binding.rv.adapter = colorAdapter
-    colors?.count()?.let {
-      colorAdapter.submitList(colors?.toList())
+      adapter = colorAdapter
+    }
+    if (items.isNullOrEmpty().not()) {
+      colorAdapter.submitList(items)
     }
     typeArray.recycle()
   }
