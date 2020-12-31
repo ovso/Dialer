@@ -63,11 +63,11 @@
 
 
       <io.github.ovso.colorpicker.EasyColorPicker
-        android:visibility="visible"
+        android:id="@+id/picker_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        />
+        android:visibility="visible" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView

@@ -1,12 +1,13 @@
 package io.github.ovso.colorpicker
 
-import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.Coil
+import coil.load
 import io.github.ovso.colorpicker.databinding.ItemColorBinding
 
 class ColorAdapter : ListAdapter<Any, ColorViewHolder>(DIFF_UTIL) {
@@ -38,9 +39,8 @@ class ColorViewHolder private constructor(private val binding: ItemColorBinding)
   RecyclerView.ViewHolder(binding.root) {
 
   fun onBindViewHolder(item: Any) {
-    (item as? Int)?.let {
-//      binding.ivColorItem.setColorFilter(item)
-//      binding.ivColorItem.imageTintList = ColorStateList.valueOf(it)
+    (item as? String)?.let {
+      binding.ivColorItem.load(ColorDrawable(Color.parseColor(it)))
     }
   }
 

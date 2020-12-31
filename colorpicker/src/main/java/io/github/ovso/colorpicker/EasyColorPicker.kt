@@ -32,7 +32,12 @@ class EasyColorPicker @JvmOverloads constructor(
       Log.d("EasyColorPicker", "set color")
     }
 
-  var colors: IntArray = intArrayOf(0x000000, 0xFFFFFF, 0xCCCCCC, 0x234CF, 0x000000, 0x000000)
+  var colors: List<String>? = null
+    set(value) {
+      field = value
+      colorAdapter.submitList(colors?.toList())
+//      requestLayout()
+    }
 
   init {
     init(attrs, defStyle)
@@ -42,9 +47,9 @@ class EasyColorPicker @JvmOverloads constructor(
     val typeArray = context.obtainStyledAttributes(
       attrs, R.styleable.EasyColorPicker, defStyle, 0
     )
-    color = typeArray.getInt(R.styleable.EasyColorPicker_bgColor, 0x000000)
+//    color = typeArray.getInt(R.styleable.EasyColorPicker_colors, 0x000000)
 
-    binding.root.setBackgroundColor(color!!)
+//    binding.root.setBackgroundColor(color!!)
     Log.d("EasyColorPicker", "init")
     binding.rv.addItemDecoration(
       GridItemDecoration(
@@ -52,7 +57,9 @@ class EasyColorPicker @JvmOverloads constructor(
       )
     )
     binding.rv.adapter = colorAdapter
-    colorAdapter.submitList(colors.toList())
+    colors?.count()?.let {
+      colorAdapter.submitList(colors?.toList())
+    }
     typeArray.recycle()
   }
 }
