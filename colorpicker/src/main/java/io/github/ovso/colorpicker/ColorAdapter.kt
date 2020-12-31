@@ -9,8 +9,6 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import com.bumptech.glide.Glide
 import io.github.ovso.colorpicker.databinding.ItemColorBinding
 
 class ColorAdapter : ListAdapter<ColorModel, ColorViewHolder>(DIFF_UTIL) {
