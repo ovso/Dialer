@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
+import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.ovso.dialer.R
 import io.github.ovso.dialer.databinding.DialogDialerAddNoBinding
@@ -43,6 +44,24 @@ class DialerFragment : DataBindingFragment<FragmentDialerBinding>(R.layout.fragm
 
     viewModel.showAddDialog.observe(owner) {
       val binding = DialogDialerAddNoBinding.inflate(requireActivity().layoutInflater)
+      binding.pickerAddDialog.apply {
+        colors = listOf(
+          "#F44336",
+          "#E91E63",
+          "#673AB7",
+          "#3F51B5",
+          "#4CAF50",
+          "#FF9800",
+          "#FFEB3B",
+          "#9E9E9E",
+          "#607D8B",
+          "#FFC107",
+        )
+        onItemClickListener = {
+          Logger.d("index: $it")
+        }
+      }
+
       AlertDialog.Builder(requireContext()).apply {
         setMessage("번호를 추가해주세요.")
         setView(binding.root)

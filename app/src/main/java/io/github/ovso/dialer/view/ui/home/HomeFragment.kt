@@ -38,18 +38,6 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
     observe()
     setupVp()
     setupTabsAndVp()
-    binding.pickerHome.colors = listOf(
-      "#F44336",
-      "#E91E63",
-      "#673AB7",
-      "#3F51B5",
-      "#4CAF50",
-      "#FF9800",
-      "#FFEB3B",
-      "#9E9E9E",
-      "#607D8B",
-      "#FFC107",
-    )
   }
 
   private fun setupTabsAndVp() {

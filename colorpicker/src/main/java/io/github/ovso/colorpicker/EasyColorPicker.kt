@@ -37,9 +37,12 @@ class EasyColorPicker @JvmOverloads constructor(
         submitList(items)
 
         checkIndex = index
+        this@EasyColorPicker.onItemClickListener?.invoke(index)
       }
     }
   }
+
+  var onItemClickListener: ((Int) -> Unit)? = null
 
   @ColorRes
   var color: Int? = null
@@ -49,7 +52,7 @@ class EasyColorPicker @JvmOverloads constructor(
       Log.d("EasyColorPicker", "set color")
     }
 
-  var items: List<ColorModel>? = null
+  private var items: List<ColorModel>? = null
 
   var checkIndex: Int = 0
 
