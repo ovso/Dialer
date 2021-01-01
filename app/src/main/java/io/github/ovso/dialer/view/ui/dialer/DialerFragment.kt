@@ -1,7 +1,10 @@
 package io.github.ovso.dialer.view.ui.dialer
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,14 +18,11 @@ import io.github.ovso.dialer.view.ui.dialer.adapter.DialerAdapter
 class DialerFragment : DataBindingFragment<FragmentDialerBinding>(R.layout.fragment_dialer) {
 
   override val viewModel: DialerViewModel by viewModels()
-
   private val adapter by lazy { DialerAdapter() }
-
-  private lateinit var contactsDialog: ContactsDialog
+  private var contactsDialog: ContactsDialog? = null
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    contactsDialog = ContactsDialog(this)
     observe()
   }
 
@@ -46,9 +46,19 @@ class DialerFragment : DataBindingFragment<FragmentDialerBinding>(R.layout.fragm
     }
 
     viewModel.showAddDialog.observe(owner) {
-      contactsDialog.show()
+      ContactsDialog(
+        requireContext(),
+        contactsDialogLauncher
+      ).show().also {
+        contactsDialog = it
+      }
     }
   }
+
+  private var contactsDialogLauncher: ActivityResultLauncher<Intent> =
+    registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+      contactsDialog?.onActivityResult(it)
+    }
 
 
   companion object {
