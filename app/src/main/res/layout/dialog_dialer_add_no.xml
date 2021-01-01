@@ -5,28 +5,46 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content">
 
-  <EditText
-    android:id="@+id/et_add_dialog_no"
+  <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/til_add_dialog_name"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:importantForAutofill="no"
-    android:inputType="text"
+    app:endIconMode="clear_text"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    tools:ignore="LabelFor" />
+    app:layout_constraintTop_toTopOf="parent">
 
-  <EditText
-    android:id="@+id/et_add_dialog_nm"
+    <com.google.android.material.textfield.TextInputEditText
+      android:id="@+id/et_add_dialog_no"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:backgroundTint="@android:color/white"
+      android:gravity="center_vertical"
+      android:hint="@string/add_dialog_name_hint"
+      android:inputType="text"
+      android:maxLines="1" />
+
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/til_add_dialog_no"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:importantForAutofill="no"
-    android:inputType="text"
+    app:endIconMode="clear_text"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/et_add_dialog_no"
-    tools:ignore="LabelFor" />
+    app:layout_constraintTop_toBottomOf="@id/til_add_dialog_name">
 
+    <com.google.android.material.textfield.TextInputEditText
+      android:id="@+id/et_add_dialog_nm"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:backgroundTint="@android:color/white"
+      android:hint="@string/add_dialog_no_hint"
+      android:inputType="text"
+      android:maxLines="1" />
+
+  </com.google.android.material.textfield.TextInputLayout>
 
   <io.github.ovso.colorpicker.EasyColorPicker
     android:id="@+id/picker_add_dialog"
@@ -35,6 +53,71 @@
     app:bgColor="#cccccc"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/et_add_dialog_nm" />
+    app:layout_constraintTop_toBottomOf="@id/til_add_dialog_no"
+    tools:background="@color/gray_400"
+    tools:layout_height="150dp" />
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:divider="@android:color/darker_gray"
+    android:orientation="vertical"
+    android:showDividers="middle"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/picker_add_dialog">
+
+    <TextView
+      android:id="@+id/tv_add_dialog_get_no"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="?attr/selectableItemBackground"
+      android:clickable="true"
+      android:focusable="true"
+      android:gravity="center"
+      android:paddingTop="10dp"
+      android:paddingBottom="10dp"
+      android:text="연락처 가져오기"
+      android:textColor="@android:color/black"
+      android:textSize="18sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/picker_add_dialog" />
+
+    <TextView
+      android:id="@+id/tv_add_dialog_del_no"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="?attr/selectableItemBackground"
+      android:clickable="true"
+      android:focusable="true"
+      android:gravity="center"
+      android:paddingTop="10dp"
+      android:paddingBottom="10dp"
+      android:text="연락처 지우기"
+      android:textColor="@android:color/black"
+      android:textSize="18sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tv_add_dialog_get_no" />
+
+    <TextView
+      android:id="@+id/tv_add_dialog_sms"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="?attr/selectableItemBackground"
+      android:clickable="true"
+      android:focusable="true"
+      android:gravity="center"
+      android:paddingTop="10dp"
+      android:paddingBottom="10dp"
+      android:text="SMS"
+      android:textColor="@android:color/black"
+      android:textSize="18sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tv_add_dialog_del_no" />
+
+  </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
