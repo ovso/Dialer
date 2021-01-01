@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
-import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.ovso.dialer.R
-import io.github.ovso.dialer.databinding.DialogDialerAddNoBinding
 import io.github.ovso.dialer.databinding.FragmentDialerBinding
 import io.github.ovso.dialer.view.base.DataBindingFragment
+import io.github.ovso.dialer.view.ui.ContactsDialog
 import io.github.ovso.dialer.view.ui.dialer.adapter.DialerAdapter
 
 @AndroidEntryPoint
@@ -18,8 +17,12 @@ class DialerFragment : DataBindingFragment<FragmentDialerBinding>(R.layout.fragm
   override val viewModel: DialerViewModel by viewModels()
 
   private val adapter by lazy { DialerAdapter() }
+
+  private lateinit var contactsDialog: ContactsDialog
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    contactsDialog = ContactsDialog(this)
     observe()
   }
 
@@ -43,24 +46,10 @@ class DialerFragment : DataBindingFragment<FragmentDialerBinding>(R.layout.fragm
     }
 
     viewModel.showAddDialog.observe(owner) {
-      val binding = DialogDialerAddNoBinding.inflate(requireActivity().layoutInflater)
-      binding.pickerAddDialog.apply {
-        colors = resources.getStringArray(R.array.picker_colors).toList()
-        onItemClickListener = {
-          Logger.d("index: $it")
-        }
-      }
-      binding.tvAddDialogGetNo.setOnClickListener {
-        Logger.d("onClick")
-      }
-      AlertDialog.Builder(requireContext()).apply {
-        setView(binding.root)
-        setPositiveButton(android.R.string.ok, null)
-        setNegativeButton(android.R.string.cancel, null)
-        show()
-      }
+      contactsDialog.show()
     }
   }
+
 
   companion object {
     fun newInstance() = DialerFragment()
