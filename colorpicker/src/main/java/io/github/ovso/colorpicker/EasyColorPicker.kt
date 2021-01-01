@@ -36,13 +36,18 @@ class EasyColorPicker @JvmOverloads constructor(
         items = newItems
         submitList(items)
 
+        when (checkIndex) {
+          index -> this@EasyColorPicker.onItemReselectListener?.invoke(index)
+          else -> this@EasyColorPicker.onItemClickListener?.invoke(index)
+        }
+
         checkIndex = index
-        this@EasyColorPicker.onItemClickListener?.invoke(index)
       }
     }
   }
 
   var onItemClickListener: ((Int) -> Unit)? = null
+  var onItemReselectListener: ((Int) -> Unit)? = null
 
   @ColorRes
   var color: Int? = null
