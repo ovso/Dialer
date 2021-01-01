@@ -9,6 +9,7 @@
     android:id="@+id/til_add_dialog_name"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="16dp"
     app:endIconMode="clear_text"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +23,8 @@
       android:gravity="center_vertical"
       android:hint="@string/add_dialog_name_hint"
       android:inputType="text"
-      android:maxLines="1" />
+      android:maxLines="1"
+      android:textSize="18sp" />
 
   </com.google.android.material.textfield.TextInputLayout>
 
@@ -30,6 +32,7 @@
     android:id="@+id/til_add_dialog_no"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="16dp"
     app:endIconMode="clear_text"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +45,8 @@
       android:backgroundTint="@android:color/white"
       android:hint="@string/add_dialog_no_hint"
       android:inputType="text"
-      android:maxLines="1" />
+      android:maxLines="1"
+      android:textSize="18sp" />
 
   </com.google.android.material.textfield.TextInputLayout>
 
@@ -50,7 +54,6 @@
     android:id="@+id/picker_add_dialog"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="16dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/ll_no_add_dialog_btn_container"
@@ -61,8 +64,8 @@
     android:id="@+id/ll_no_add_dialog_btn_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="16dp"
-    android:layout_marginBottom="16dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
     android:divider="@android:color/darker_gray"
     android:orientation="vertical"
     android:showDividers="middle"
@@ -75,51 +78,27 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:background="?attr/selectableItemBackground"
-      android:clickable="true"
-      android:focusable="true"
       android:gravity="center"
-      android:paddingTop="10dp"
-      android:paddingBottom="10dp"
+      android:paddingTop="15dp"
+      android:paddingBottom="15dp"
       android:text="@string/add_no_dialog_get_no"
       android:textColor="@android:color/black"
-      android:textSize="18sp"
+      android:textSize="15sp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/picker_add_dialog" />
-
-    <TextView
-      android:id="@+id/tv_add_dialog_del_no"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:background="?attr/selectableItemBackground"
-      android:clickable="true"
-      android:focusable="true"
-      android:gravity="center"
-      android:paddingTop="10dp"
-      android:paddingBottom="10dp"
-      android:text="@string/add_no_dialog_no_del"
-      android:textColor="@android:color/black"
-      android:textSize="18sp"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/tv_add_dialog_get_no" />
 
     <TextView
       android:id="@+id/tv_add_dialog_sms"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:background="?attr/selectableItemBackground"
-      android:clickable="true"
-      android:focusable="true"
       android:gravity="center"
-      android:paddingTop="10dp"
-      android:paddingBottom="10dp"
+      android:paddingTop="15dp"
+      android:paddingBottom="15dp"
       android:text="@string/add_no_dialog_sms"
       android:textColor="@android:color/black"
-      android:textSize="18sp"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/tv_add_dialog_del_no" />
+      android:textSize="15sp" />
 
   </LinearLayout>
 
