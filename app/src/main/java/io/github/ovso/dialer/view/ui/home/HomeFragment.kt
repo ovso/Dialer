@@ -66,10 +66,9 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
     val binding = DialogHomeAddGroupBinding.inflate(requireActivity().layoutInflater)
     val onOkClick = DialogInterface.OnClickListener { dialog, _ ->
       dialog.dismiss()
-      listener?.invoke(binding.root.text.trim().toString())
+      listener?.invoke(binding.etGroupAddDialog.text?.trim().toString())
     }
     AlertDialog.Builder(requireContext()).apply {
-      setTitle(R.string.home_group_add_dialog_msg)
       setView(binding.root)
       setPositiveButton(android.R.string.ok, onOkClick)
       setNegativeButton(android.R.string.cancel, null)
