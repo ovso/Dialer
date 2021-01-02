@@ -59,7 +59,7 @@ class EasyColorPicker @JvmOverloads constructor(
 
   private var items: List<ColorModel>? = null
 
-  var checkIndex: Int = 0
+  private var checkIndex: Int = 0
 
   var colors: List<String>? = null
     set(value) {

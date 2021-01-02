@@ -7,6 +7,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
+import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.ovso.dialer.R
 import io.github.ovso.dialer.databinding.FragmentDialerBinding
@@ -48,7 +49,11 @@ class DialerFragment : DataBindingFragment<FragmentDialerBinding>(R.layout.fragm
       ContactsDialog(
         requireContext(),
         contactsDialogLauncher
-      ).show().also {
+      ).apply {
+        onOkClickListener = { model ->
+          Logger.d("contactsDialogModel: $model")
+        }
+      }.show().also {
         contactsDialog = it
       }
     }

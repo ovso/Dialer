@@ -10,22 +10,27 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.database.getStringOrNull
 import com.orhanobut.logger.Logger
 import io.github.ovso.dialer.R
+import io.github.ovso.dialer.data.view.ContactsDialogModel
 import io.github.ovso.dialer.databinding.DialogDialerAddNoBinding
 
 class ContactsDialog(
   private val context: Context,
   private val launcher: ActivityResultLauncher<Intent>
 ) {
-  private var binding: DialogDialerAddNoBinding? =
+  private var binding: DialogDialerAddNoBinding =
     DialogDialerAddNoBinding.inflate(LayoutInflater.from(context))
 
+  var onOkClickListener: ((ContactsDialogModel) -> Unit)? = null
+  var onCancelClickListener: ((ContactsDialogModel) -> Unit)? = null
+  var colorIndex: Int = 0
   fun show(): ContactsDialog {
-    binding?.apply {
+    binding.apply {
 
       pickerAddDialog.also { picker ->
         picker.colors = context.resources.getStringArray(R.array.picker_colors).toList()
         picker.onItemClickListener = {
-          Logger.d("index: $it")
+          Logger.d("colorIndex: $it")
+          colorIndex = it
         }
       }
       tvAddDialogGetNo.setOnClickListener {
@@ -36,14 +41,19 @@ class ContactsDialog(
       }
     }
     AlertDialog.Builder(context).apply {
-      setView(binding?.root)
+      setView(binding.root)
       setCancelable(false)
       setPositiveButton(android.R.string.ok) { dialog, _ ->
-        binding = null
+        onOkClickListener?.invoke(
+          ContactsDialogModel(
+            nm = binding.etAddDialogNm.text.toString(),
+            no = binding.etAddDialogNo.text.toString(),
+            colorIndex = colorIndex
+          )
+        )
         dialog.dismiss()
       }
       setNegativeButton(android.R.string.cancel) { dialog, _ ->
-        binding = null
         dialog.dismiss()
       }
       show()
@@ -68,8 +78,8 @@ class ContactsDialog(
         val no = cursor.getStringOrNull(1)
         Logger.d("nm: $nm")
         Logger.d("no: $no")
-        binding?.etAddDialogNm?.setText(nm)
-        binding?.etAddDialogNo?.setText(no)
+        binding.etAddDialogNm.setText(nm)
+        binding.etAddDialogNo.setText(no)
       }
     }
 
