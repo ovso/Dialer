@@ -11,7 +11,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.github.ovso.dialer.R
 import io.github.ovso.dialer.databinding.FragmentDialerBinding
 import io.github.ovso.dialer.view.base.DataBindingFragment
-import io.github.ovso.dialer.view.ui.ContactsDialog
 import io.github.ovso.dialer.view.ui.dialer.adapter.DialerAdapter
 
 @AndroidEntryPoint
@@ -57,7 +56,7 @@ class DialerFragment : DataBindingFragment<FragmentDialerBinding>(R.layout.fragm
 
   private var contactsDialogLauncher: ActivityResultLauncher<Intent> =
     registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-      contactsDialog?.onActivityResult(it)
+      contactsDialog?.onContactsResult(it)
     }
 
 

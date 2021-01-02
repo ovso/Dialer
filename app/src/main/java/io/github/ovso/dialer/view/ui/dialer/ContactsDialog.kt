@@ -1,4 +1,4 @@
-package io.github.ovso.dialer.view.ui
+package io.github.ovso.dialer.view.ui.dialer
 
 import android.content.Context
 import android.content.Intent
@@ -52,7 +52,7 @@ class ContactsDialog(
     return this
   }
 
-  fun onActivityResult(it: ActivityResult?) {
+  fun onContactsResult(it: ActivityResult?) {
     Logger.d("it: ${it?.data?.data?.path}")
     it?.data?.data?.let { uri ->
       context.contentResolver?.query(
