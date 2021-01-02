@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.orhanobut.logger.Logger
+import io.github.ovso.dialer.data.view.ContactsDialogModel
 import io.github.ovso.dialer.data.view.DialerItemModel
 
 class DialerViewModel @ViewModelInject constructor() : ViewModel() {
@@ -27,7 +28,7 @@ class DialerViewModel @ViewModelInject constructor() : ViewModel() {
 //      DialerItemModel("peter", "010-3429-4620"),
 //      DialerItemModel("peter", "010-3429-4620"),
 //      DialerItemModel("peter", "010-3429-4620"),
-      DialerItemModel("peter", "010-3429-4620", footer = true),
+      DialerItemModel(name = "", no = "", footer = true),
     )
   }
 
@@ -37,5 +38,9 @@ class DialerViewModel @ViewModelInject constructor() : ViewModel() {
       true -> _showAddDialog.value = item
       else -> _showEditDialog.value = item
     }
+  }
+
+  fun onContactsDialogOkClick(model: ContactsDialogModel) {
+    Logger.d("model: $model")
   }
 }
