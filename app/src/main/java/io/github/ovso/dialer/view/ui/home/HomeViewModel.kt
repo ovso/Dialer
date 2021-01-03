@@ -7,7 +7,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.orhanobut.logger.Logger
 import io.github.ovso.dialer.data.HomeRepository
+import io.github.ovso.dialer.data.toGroupModels
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeViewModel @ViewModelInject constructor(
   private val homeRepository: HomeRepository
@@ -16,7 +19,14 @@ class HomeViewModel @ViewModelInject constructor(
   init {
     Logger.d("repo: $homeRepository")
     viewModelScope.launch {
-      Logger.d("contacts: ${homeRepository.getContacts()}")
+      reqGroups()
+    }
+  }
+
+  private suspend fun reqGroups() = withContext(Dispatchers.IO) {
+    val groupModels = homeRepository.getGroups().toGroupModels()
+    groupModels.forEach {
+      _addTab.postValue(it.name)
     }
   }
 
