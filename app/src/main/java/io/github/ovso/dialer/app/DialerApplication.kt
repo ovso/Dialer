@@ -7,7 +7,7 @@ import io.github.ovso.dialer.data.local.AppDatabase
 
 @HiltAndroidApp
 class DialerApplication : Application() {
-  private lateinit var database: AppDatabase
+  lateinit var database: AppDatabase
   override fun onCreate() {
     super.onCreate()
     database = AppInitializer.getInstance(this).initializeComponent(DatabaseInitializer::class.java)

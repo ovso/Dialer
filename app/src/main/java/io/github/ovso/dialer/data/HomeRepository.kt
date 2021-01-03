@@ -1,4 +1,5 @@
 package io.github.ovso.dialer.data
 
-interface HomeRepository {
-}
+import io.github.ovso.dialer.data.local.LocalDataSource
+
+interface HomeRepository: LocalDataSource

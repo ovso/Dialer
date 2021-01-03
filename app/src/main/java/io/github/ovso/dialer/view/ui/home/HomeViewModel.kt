@@ -4,11 +4,21 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.orhanobut.logger.Logger
+import io.github.ovso.dialer.data.HomeRepository
+import kotlinx.coroutines.launch
 
 class HomeViewModel @ViewModelInject constructor(
-
+  private val homeRepository: HomeRepository
 ) : ViewModel() {
+
+  init {
+    Logger.d("repo: $homeRepository")
+    viewModelScope.launch {
+      Logger.d("contacts: ${homeRepository.getContacts()}")
+    }
+  }
 
   private val _text = MutableLiveData<String>().apply {
     value = "This is home Fragment"
