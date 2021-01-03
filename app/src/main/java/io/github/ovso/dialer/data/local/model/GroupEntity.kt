@@ -1,6 +1,5 @@
 package io.github.ovso.dialer.data.local.model
 
-import android.provider.BaseColumns
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -8,8 +7,8 @@ import androidx.room.PrimaryKey
 @Entity(tableName = GroupEntity.TABLE_NAME)
 data class GroupEntity(
   @PrimaryKey(autoGenerate = true)
-  @ColumnInfo(index = true, name = COLUMN_ID)
-  val id: Int,
+  @ColumnInfo(name = COLUMN_GROUP_ID)
+  val groupId: Int,
   @ColumnInfo(name = COLUMN_NAME)
   val name: String,
   @ColumnInfo(name = COLUMN_INDEX)
@@ -17,7 +16,7 @@ data class GroupEntity(
 ) {
   companion object {
     const val TABLE_NAME = "groups"
-    const val COLUMN_ID = BaseColumns._ID
+    const val COLUMN_GROUP_ID = "groupId"
     const val COLUMN_NAME = "name"
     const val COLUMN_INDEX = "index"
   }
