@@ -3,31 +3,28 @@ package io.github.ovso.dialer.view.ui.home
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.orhanobut.logger.Logger
 import io.github.ovso.dialer.data.HomeRepository
-import io.github.ovso.dialer.data.toGroupModels
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import io.github.ovso.dialer.data.local.model.GroupEntity
 
 class HomeViewModel @ViewModelInject constructor(
   private val homeRepository: HomeRepository
 ) : ViewModel() {
 
+  private lateinit var groupsObserver:Observer<List<GroupEntity>>
+
   init {
-    Logger.d("repo: $homeRepository")
-    viewModelScope.launch {
-      reqGroups()
-    }
+    Logger.d("homeRepository: $homeRepository")
+    reqGroups()
   }
 
-  private suspend fun reqGroups() = withContext(Dispatchers.IO) {
-    val groupModels = homeRepository.getGroups().toGroupModels()
-    groupModels.forEach {
-      _addTab.postValue(it.name)
+  private fun reqGroups() {
+    groupsObserver = Observer<List<GroupEntity>> {
+      Logger.d("groups: $it")
     }
+    homeRepository.getGroups().observeForever(groupsObserver)
   }
 
   private val _text = MutableLiveData<String>().apply {
@@ -46,5 +43,10 @@ class HomeViewModel @ViewModelInject constructor(
       Logger.d("text: $text")
       _addTab.value = if (text.isNotEmpty()) text else "?"
     }
+  }
+
+  override fun onCleared() {
+    super.onCleared()
+    homeRepository.getGroups().removeObserver(groupsObserver)
   }
 }
