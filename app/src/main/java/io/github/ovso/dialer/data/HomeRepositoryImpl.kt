@@ -27,4 +27,19 @@ class HomeRepositoryImpl @Inject constructor(
     }
   }
 
+  override suspend fun insertGroup(entity: GroupEntity) {
+    return local.insertGroup(entity)
+  }
+
+  override suspend fun deleteGroup(entity: GroupEntity) {
+    return local.deleteGroup(entity)
+  }
+
+  override suspend fun insertContact(entity: ContactEntity) {
+    local.insertContact(entity)
+  }
+
+  override suspend fun deleteContact(entity: ContactEntity) {
+    local.deleteContact(entity)
+  }
 }

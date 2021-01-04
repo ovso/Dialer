@@ -1,19 +1,20 @@
 package io.github.ovso.dialer.view.ui.home
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.orhanobut.logger.Logger
 import io.github.ovso.dialer.data.HomeRepository
 import io.github.ovso.dialer.data.local.model.GroupEntity
+import io.github.ovso.dialer.data.toGroupModels
+import io.github.ovso.dialer.extensions.toStringTime
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class HomeViewModel @ViewModelInject constructor(
   private val homeRepository: HomeRepository
 ) : ViewModel() {
 
-  private lateinit var groupsObserver:Observer<List<GroupEntity>>
+  private lateinit var groupsObserver: Observer<List<GroupEntity>>
 
   init {
     Logger.d("homeRepository: $homeRepository")
@@ -23,6 +24,11 @@ class HomeViewModel @ViewModelInject constructor(
   private fun reqGroups() {
     groupsObserver = Observer<List<GroupEntity>> {
       Logger.d("groups: $it")
+      viewModelScope.launch(Dispatchers.IO) {
+        it.toGroupModels().forEach { groupModel ->
+          _addTab.postValue(groupModel.name)
+        }
+      }
     }
     homeRepository.getGroups().observeForever(groupsObserver)
   }
@@ -40,9 +46,18 @@ class HomeViewModel @ViewModelInject constructor(
 
   fun onFabClick() {
     _showAddDialog.value = { text ->
-      Logger.d("text: $text")
-      _addTab.value = if (text.isNotEmpty()) text else "?"
+      viewModelScope.launch {
+        val groupId = System.currentTimeMillis().toStringTime("yyyyMMddHHmmss").toLong()
+        homeRepository.insertGroup(
+          GroupEntity(
+            groupId = groupId,
+            name = text,
+            index = 0
+          )
+        )
+      }
     }
+
   }
 
   override fun onCleared() {

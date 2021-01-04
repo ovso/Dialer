@@ -8,4 +8,8 @@ interface LocalDataSource {
   fun getGroups(): LiveData<List<GroupEntity>>
   suspend fun getContact(contactId: Long): ContactEntity
   suspend fun getContacts(): List<ContactEntity>
+  suspend fun insertGroup(entity: GroupEntity)
+  suspend fun deleteGroup(entity: GroupEntity)
+  suspend fun insertContact(entity: ContactEntity)
+  suspend fun deleteContact(entity: ContactEntity)
 }

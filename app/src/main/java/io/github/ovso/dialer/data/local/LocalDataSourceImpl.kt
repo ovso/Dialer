@@ -22,4 +22,21 @@ class LocalDataSourceImpl @Inject constructor(@ActivityContext context: Context)
   override suspend fun getContacts(): List<ContactEntity> {
     return database.contactDao().getContacts()
   }
+
+  override suspend fun insertGroup(entity: GroupEntity) {
+    database.groupDao().insertGroup(entity)
+  }
+
+  override suspend fun deleteGroup(entity: GroupEntity) {
+    database.groupDao().deleteGroup(entity)
+  }
+
+  override suspend fun insertContact(entity: ContactEntity) {
+    database.contactDao().insertContact(entity)
+  }
+
+  override suspend fun deleteContact(entity: ContactEntity) {
+    database.contactDao().deleteContact(entity)
+  }
+
 }

@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class GroupEntity(
   @PrimaryKey(autoGenerate = true)
   @ColumnInfo(name = COLUMN_GROUP_ID)
-  val groupId: Int,
+  val groupId: Long,
   @ColumnInfo(name = COLUMN_NAME)
   val name: String,
   @ColumnInfo(name = COLUMN_INDEX)
