@@ -15,6 +15,8 @@ class HomeViewModel @ViewModelInject constructor(
 
   private lateinit var groupsObserver: Observer<List<GroupEntity>>
 
+  private val _groups = MutableLiveData<List<GroupEntity>>()
+
   init {
     Logger.d("homeRepository: $homeRepository")
     reqGroups()
@@ -23,6 +25,7 @@ class HomeViewModel @ViewModelInject constructor(
   private fun reqGroups() {
     groupsObserver = Observer<List<GroupEntity>> {
       Logger.d("groups: $it")
+      _groups.value = it
       it.toGroupModels().forEach { groupModel ->
         _addTab.value = groupModel.name
       }
@@ -54,7 +57,6 @@ class HomeViewModel @ViewModelInject constructor(
         )
       }
     }
-
   }
 
   override fun onCleared() {
@@ -62,6 +64,11 @@ class HomeViewModel @ViewModelInject constructor(
     homeRepository.getGroups().removeObserver(groupsObserver)
   }
 
-  fun onTabReselected(position: Int?) {
+  fun onDeleteGroupClick(position: Int) {
+    _groups.value?.let { groups ->
+      viewModelScope.launch {
+        homeRepository.deleteGroup(groups[position])
+      }
+    }
   }
 }

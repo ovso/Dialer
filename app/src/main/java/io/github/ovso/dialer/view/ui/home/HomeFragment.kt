@@ -7,6 +7,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,9 +47,16 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
       tabs.text = adapter.items[position]
     }.attach()
     binding.tabs.addOnTabSelectedListener(object : OnSimpleTabSelectedListener() {
-      override fun onTabReselected(position: Int) {
-        super.onTabReselected(position)
-        viewModel.onTabReselected(position = position)
+      override fun onTabReselected(tab: TabLayout.Tab) {
+        super.onTabReselected(tab)
+        AlertDialog.Builder(requireContext())
+          .setMessage(getString(R.string.home_delete_group_dialog_msg, tab.text))
+          .setPositiveButton(android.R.string.ok) { dialog, _ ->
+            dialog.dismiss()
+            viewModel.onDeleteGroupClick(tab.position)
+          }
+          .setNegativeButton(android.R.string.cancel, null)
+          .show()
       }
     })
   }
