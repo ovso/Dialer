@@ -64,4 +64,7 @@ class HomeViewModel @ViewModelInject constructor(
     super.onCleared()
     homeRepository.getGroups().removeObserver(groupsObserver)
   }
+
+  fun onTabReselected(position: Int?) {
+  }
 }
