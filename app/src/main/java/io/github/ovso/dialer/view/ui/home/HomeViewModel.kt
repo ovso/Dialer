@@ -7,7 +7,6 @@ import io.github.ovso.dialer.data.HomeRepository
 import io.github.ovso.dialer.data.local.model.GroupEntity
 import io.github.ovso.dialer.data.toGroupModels
 import io.github.ovso.dialer.extensions.toStringTime
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HomeViewModel @ViewModelInject constructor(
@@ -24,10 +23,8 @@ class HomeViewModel @ViewModelInject constructor(
   private fun reqGroups() {
     groupsObserver = Observer<List<GroupEntity>> {
       Logger.d("groups: $it")
-      viewModelScope.launch(Dispatchers.IO) {
-        it.toGroupModels().forEach { groupModel ->
-          _addTab.postValue(groupModel.name)
-        }
+      it.toGroupModels().forEach { groupModel ->
+        _addTab.value = groupModel.name
       }
     }
     homeRepository.getGroups().observeForever(groupsObserver)
