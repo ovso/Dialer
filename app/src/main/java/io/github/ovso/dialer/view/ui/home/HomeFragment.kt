@@ -7,7 +7,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,17 +45,11 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
       Logger.d("text: ${adapter.items[position]}")
       tabs.text = adapter.items[position]
     }.attach()
-    binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-      override fun onTabSelected(tab: TabLayout.Tab?) {
+    binding.tabs.addOnTabSelectedListener(object : OnSimpleTabSelectedListener() {
+      override fun onTabReselected(position: Int) {
+        super.onTabReselected(position)
+        viewModel.onTabReselected(position = position)
       }
-
-      override fun onTabUnselected(tab: TabLayout.Tab?) {
-      }
-
-      override fun onTabReselected(tab: TabLayout.Tab?) {
-        viewModel.onTabReselected(tab?.position)
-      }
-
     })
   }
 
