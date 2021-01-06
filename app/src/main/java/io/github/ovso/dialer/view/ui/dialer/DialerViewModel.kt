@@ -26,8 +26,6 @@ class DialerViewModel @ViewModelInject constructor() : ViewModel() {
     _setupAdapter.value = ::onItemClick
     _items.value = listOf(
 //      DialerItemModel("peter", "010-3429-4620"),
-//      DialerItemModel("peter", "010-3429-4620"),
-//      DialerItemModel("peter", "010-3429-4620"),
       DialerItemModel(name = "", no = "", footer = true),
     )
   }
