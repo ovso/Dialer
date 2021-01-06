@@ -70,8 +70,10 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
     viewModel.showAddDialog.observe(owner) {
       showAddDialog(it)
     }
-    viewModel.addTab.observe(owner) {
-      adapter.items.add(it)
+    viewModel.addTabs.observe(owner) {
+      adapter.items.clear()
+      adapter.notifyDataSetChanged()
+      adapter.items.addAll(it)
       adapter.notifyDataSetChanged()
     }
   }

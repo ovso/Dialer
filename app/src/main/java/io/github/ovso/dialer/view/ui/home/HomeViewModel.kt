@@ -7,6 +7,7 @@ import io.github.ovso.dialer.data.HomeRepository
 import io.github.ovso.dialer.data.local.model.GroupEntity
 import io.github.ovso.dialer.data.toGroupModels
 import io.github.ovso.dialer.extensions.toStringTime
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HomeViewModel @ViewModelInject constructor(
@@ -17,22 +18,6 @@ class HomeViewModel @ViewModelInject constructor(
 
   private val _groups = MutableLiveData<List<GroupEntity>>()
 
-  init {
-    Logger.d("homeRepository: $homeRepository")
-    reqGroups()
-  }
-
-  private fun reqGroups() {
-    groupsObserver = Observer<List<GroupEntity>> {
-      Logger.d("groups: $it")
-      _groups.value = it
-      it.toGroupModels().forEach { groupModel ->
-        _addTab.value = groupModel.name
-      }
-    }
-    homeRepository.getGroups().observeForever(groupsObserver)
-  }
-
   private val _text = MutableLiveData<String>().apply {
     value = "This is home Fragment"
   }
@@ -41,8 +26,28 @@ class HomeViewModel @ViewModelInject constructor(
   private val _showAddDialog = MutableLiveData<((String) -> Unit)>()
   val showAddDialog: LiveData<((String) -> Unit)> get() = _showAddDialog
 
-  private val _addTab = MutableLiveData<String>()
-  val addTab: LiveData<String> get() = _addTab
+  private val _addTabs = MutableLiveData<List<String>>()
+  val addTabs: LiveData<List<String>> get() = _addTabs
+
+  init {
+    Logger.d("homeRepository: $homeRepository")
+    reqGroups()
+  }
+
+  private fun reqGroups() {
+    groupsObserver = Observer<List<GroupEntity>> {
+      Logger.d("groups: $it")
+      viewModelScope.launch(Dispatchers.IO) {
+        _groups.postValue(it)
+        _addTabs.postValue(
+          it.toGroupModels().map { model ->
+            model.name
+          }
+        )
+      }
+    }
+    homeRepository.getGroups().observeForever(groupsObserver)
+  }
 
   fun onFabClick() {
     _showAddDialog.value = { text ->
