@@ -19,7 +19,7 @@ class LocalDataSourceImpl @Inject constructor(@ActivityContext context: Context)
     return database.contactDao().getContact(contactId)
   }
 
-  override suspend fun getContacts(): List<ContactEntity> {
+  override fun getContacts(): LiveData<List<ContactEntity>> {
     return database.contactDao().getContacts()
   }
 

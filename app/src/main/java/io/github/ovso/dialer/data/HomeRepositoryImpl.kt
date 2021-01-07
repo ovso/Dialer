@@ -21,10 +21,8 @@ class HomeRepositoryImpl @Inject constructor(
     }
   }
 
-  override suspend fun getContacts(): List<ContactEntity> {
-    return withContext(Dispatchers.IO) {
-      local.getContacts()
-    }
+  override fun getContacts(): LiveData<List<ContactEntity>> {
+    return local.getContacts()
   }
 
   override suspend fun insertGroup(entity: GroupEntity) {

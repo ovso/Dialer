@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.orhanobut.logger.Logger
 import io.github.ovso.dialer.data.HomeRepository
 import io.github.ovso.dialer.data.local.model.ContactEntity
+import io.github.ovso.dialer.data.toDialerItemModels
 import io.github.ovso.dialer.data.view.ContactsDialogModel
 import io.github.ovso.dialer.data.view.DialerItemModel
 import io.github.ovso.dialer.extensions.toStringTime
@@ -32,10 +33,17 @@ class DialerViewModel @ViewModelInject constructor(
 
   init {
     _setupAdapter.value = ::onItemClick
-    _items.value = listOf(
-//      DialerItemModel("peter", "010-3429-4620"),
-      DialerItemModel(name = "", no = "", footer = true),
-    )
+    observe()
+  }
+
+  private fun observe() {
+    repository.getContacts().observeForever { entities ->
+      viewModelScope.launch(Dispatchers.IO) {
+        val toDialerItemModels = entities.toDialerItemModels()
+        Logger.d("dialerItemModels: $toDialerItemModels")
+        _items.postValue(entities.toDialerItemModels())
+      }
+    }
   }
 
   private fun onItemClick(item: DialerItemModel) {
@@ -50,28 +58,14 @@ class DialerViewModel @ViewModelInject constructor(
     Logger.d("model: $model")
     viewModelScope.launch(Dispatchers.IO) {
       val contactId = System.currentTimeMillis().toStringTime("yyyyMMddHHmmss").toLong()
-/*
       repository.insertContact(
         entity = ContactEntity(
           contactId = contactId,
           name = model.nm,
           no = model.no,
-          color = mo
+          color = "#CCCCCC"
         )
       )
-*/
     }
   }
 }
-
-/*
-        val groupId = System.currentTimeMillis().toStringTime("yyyyMMddHHmmss").toLong()
-        homeRepository.insertGroup(
-          GroupEntity(
-            groupId = groupId,
-            name = text,
-            index = 0
-          )
-        )
-
- */

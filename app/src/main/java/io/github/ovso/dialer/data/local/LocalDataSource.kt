@@ -7,7 +7,7 @@ import io.github.ovso.dialer.data.local.model.GroupEntity
 interface LocalDataSource {
   fun getGroups(): LiveData<List<GroupEntity>>
   suspend fun getContact(contactId: Long): ContactEntity
-  suspend fun getContacts(): List<ContactEntity>
+  fun getContacts(): LiveData<List<ContactEntity>>
   suspend fun insertGroup(entity: GroupEntity)
   suspend fun deleteGroup(entity: GroupEntity)
   suspend fun insertContact(entity: ContactEntity)

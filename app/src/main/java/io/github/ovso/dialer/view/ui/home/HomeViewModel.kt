@@ -31,10 +31,10 @@ class HomeViewModel @ViewModelInject constructor(
 
   init {
     Logger.d("homeRepository: $homeRepository")
-    reqGroups()
+    observe()
   }
 
-  private fun reqGroups() {
+  private fun observe() {
     groupsObserver = Observer<List<GroupEntity>> {
       Logger.d("groups: $it")
       viewModelScope.launch(Dispatchers.IO) {
