@@ -4,11 +4,19 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.orhanobut.logger.Logger
+import io.github.ovso.dialer.data.HomeRepository
+import io.github.ovso.dialer.data.local.model.ContactEntity
 import io.github.ovso.dialer.data.view.ContactsDialogModel
 import io.github.ovso.dialer.data.view.DialerItemModel
+import io.github.ovso.dialer.extensions.toStringTime
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class DialerViewModel @ViewModelInject constructor() : ViewModel() {
+class DialerViewModel @ViewModelInject constructor(
+  private val repository: HomeRepository
+) : ViewModel() {
 
   private val _items = MutableLiveData<List<DialerItemModel>>()
   val items: LiveData<List<DialerItemModel>> get() = _items
@@ -40,5 +48,30 @@ class DialerViewModel @ViewModelInject constructor() : ViewModel() {
 
   fun onContactsDialogOkClick(model: ContactsDialogModel) {
     Logger.d("model: $model")
+    viewModelScope.launch(Dispatchers.IO) {
+      val contactId = System.currentTimeMillis().toStringTime("yyyyMMddHHmmss").toLong()
+/*
+      repository.insertContact(
+        entity = ContactEntity(
+          contactId = contactId,
+          name = model.nm,
+          no = model.no,
+          color = mo
+        )
+      )
+*/
+    }
   }
 }
+
+/*
+        val groupId = System.currentTimeMillis().toStringTime("yyyyMMddHHmmss").toLong()
+        homeRepository.insertGroup(
+          GroupEntity(
+            groupId = groupId,
+            name = text,
+            index = 0
+          )
+        )
+
+ */
