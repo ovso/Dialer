@@ -20,22 +20,32 @@ fun List<GroupEntity>.toGroupModels(): List<GroupModel> {
 
 @WorkerThread
 fun List<ContactEntity>.toDialerItemModels(): List<DialerItemModel> {
-  return map {
-    DialerItemModel(
-      contactId = it.contactId,
-      name = it.name,
-      no = it.no,
-    )
-  }.apply {
-    toMutableList().also {
-      it.add(
-        DialerItemModel(
-          contactId = 1,
-          name = "",
-          no = "",
-          footer = true
-        )
+  return when (count() > 0) {
+    true -> map {
+      DialerItemModel(
+        contactId = it.contactId,
+        name = it.name,
+        no = it.no,
       )
+    }.apply {
+      toMutableList().also {
+        it.add(
+          DialerItemModel(
+            contactId = 1,
+            name = "",
+            no = "",
+            footer = true
+          )
+        )
+      }
     }
+    false -> listOf(
+      DialerItemModel(
+        contactId = 1,
+        name = "",
+        no = "",
+        footer = true
+      )
+    )
   }
 }
