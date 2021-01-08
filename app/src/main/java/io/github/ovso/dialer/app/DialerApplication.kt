@@ -10,6 +10,8 @@ class DialerApplication : Application() {
   lateinit var database: AppDatabase
   override fun onCreate() {
     super.onCreate()
-    database = AppInitializer.getInstance(this).initializeComponent(DatabaseInitializer::class.java)
+    database = AppInitializer
+      .getInstance(this)
+      .initializeComponent(DatabaseInitializer::class.java)
   }
 }

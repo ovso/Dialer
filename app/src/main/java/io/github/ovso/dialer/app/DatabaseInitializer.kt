@@ -12,8 +12,8 @@ class DatabaseInitializer : Initializer<AppDatabase> {
     return Room.databaseBuilder(
       context,
       AppDatabase::class.java,
-      "database"
-    ).build()
+      "database.db"
+    ).fallbackToDestructiveMigration().build()
   }
 
   override fun dependencies(): MutableList<Class<out Initializer<*>>> {

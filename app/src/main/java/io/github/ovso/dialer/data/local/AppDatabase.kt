@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import io.github.ovso.dialer.data.local.model.ContactEntity
 import io.github.ovso.dialer.data.local.model.GroupEntity
 
-@Database(entities = [GroupEntity::class, ContactEntity::class], version = 1)
+@Database(entities = [GroupEntity::class, ContactEntity::class], version = 3)
 abstract class AppDatabase : RoomDatabase() {
   abstract fun groupDao(): GroupDao
   abstract fun contactDao(): ContactDao

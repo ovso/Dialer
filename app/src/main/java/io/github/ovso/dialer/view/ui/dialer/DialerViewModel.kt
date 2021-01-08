@@ -63,7 +63,8 @@ class DialerViewModel @ViewModelInject constructor(
           contactId = contactId,
           name = model.nm,
           no = model.no,
-          color = "#CCCCCC"
+          color = "#CCCCCC",
+          parent = 1
         )
       )
     }
