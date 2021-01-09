@@ -5,6 +5,8 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.orhanobut.logger.Logger
 import io.github.ovso.dialer.data.HomeRepository
+import io.github.ovso.dialer.data.args.ARGS
+import io.github.ovso.dialer.data.args.DialerArgs
 import io.github.ovso.dialer.data.local.model.ContactEntity
 import io.github.ovso.dialer.data.mapper.toDialerItemModels
 import io.github.ovso.dialer.data.view.ContactsDialogModel
@@ -31,6 +33,9 @@ class DialerViewModel @ViewModelInject constructor(
   val showAddDialog: LiveData<DialerItemModel> get() = _showAddDialog
 
   init {
+    savedStateHandle.get<DialerArgs>(ARGS)?.let {
+      Logger.d("args: $it")
+    }
     _setupAdapter.value = ::onItemClick
     observe()
   }
