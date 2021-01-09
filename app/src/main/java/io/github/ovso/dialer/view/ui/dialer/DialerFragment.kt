@@ -6,9 +6,12 @@ import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.ovso.dialer.R
+import io.github.ovso.dialer.data.args.ARGS
+import io.github.ovso.dialer.data.args.DialerArgs
 import io.github.ovso.dialer.databinding.FragmentDialerBinding
 import io.github.ovso.dialer.view.base.DataBindingFragment
 import io.github.ovso.dialer.view.ui.dialer.adapter.DialerAdapter
@@ -63,7 +66,11 @@ class DialerFragment : DataBindingFragment<FragmentDialerBinding>(R.layout.fragm
 
 
   companion object {
-    fun newInstance() = DialerFragment()
+    fun newInstance(args: DialerArgs): DialerFragment {
+      return DialerFragment().apply {
+        arguments = bundleOf(ARGS to args)
+      }
+    }
   }
 
 }

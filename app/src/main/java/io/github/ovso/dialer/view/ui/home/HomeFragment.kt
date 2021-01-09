@@ -43,8 +43,7 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
 
   private fun setupTabsAndVp() {
     TabLayoutMediator(binding.tabs, binding.vpHome) { tabs, position ->
-      Logger.d("text: ${adapter.items[position]}")
-      tabs.text = adapter.items[position]
+      tabs.text = adapter.items2[position].name
     }.attach()
     binding.tabs.addOnTabSelectedListener(object : OnSimpleTabSelectedListener() {
       override fun onTabReselected(tab: TabLayout.Tab) {
@@ -70,10 +69,10 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
     viewModel.showAddDialog.observe(owner) {
       showAddDialog(it)
     }
-    viewModel.addTabs.observe(owner) {
-      adapter.items.clear()
-      adapter.notifyDataSetChanged()
-      adapter.items.addAll(it)
+
+    viewModel.groups.observe(owner) {
+      adapter.items2.clear()
+      adapter.items2.addAll(it)
       adapter.notifyDataSetChanged()
     }
   }

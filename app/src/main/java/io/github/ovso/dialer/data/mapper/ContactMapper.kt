@@ -1,22 +1,8 @@
-package io.github.ovso.dialer.data
+package io.github.ovso.dialer.data.mapper
 
 import androidx.annotation.WorkerThread
 import io.github.ovso.dialer.data.local.model.ContactEntity
-import io.github.ovso.dialer.data.local.model.GroupEntity
 import io.github.ovso.dialer.data.view.DialerItemModel
-import io.github.ovso.dialer.data.view.GroupModel
-
-
-@WorkerThread
-fun List<GroupEntity>.toGroupModels(): List<GroupModel> {
-  return map {
-    GroupModel(
-      groupId = it.groupId,
-      name = it.name,
-      index = it.index
-    )
-  }
-}
 
 @WorkerThread
 fun List<ContactEntity>.toDialerItemModels(): List<DialerItemModel> {

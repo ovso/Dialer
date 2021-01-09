@@ -1,14 +1,12 @@
 package io.github.ovso.dialer.view.ui.dialer
 
+import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.orhanobut.logger.Logger
 import io.github.ovso.dialer.data.HomeRepository
 import io.github.ovso.dialer.data.local.model.ContactEntity
-import io.github.ovso.dialer.data.toDialerItemModels
+import io.github.ovso.dialer.data.mapper.toDialerItemModels
 import io.github.ovso.dialer.data.view.ContactsDialogModel
 import io.github.ovso.dialer.data.view.DialerItemModel
 import io.github.ovso.dialer.extensions.toStringTime
@@ -16,7 +14,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class DialerViewModel @ViewModelInject constructor(
-  private val repository: HomeRepository
+  private val repository: HomeRepository,
+  @Assisted private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
   private val _items = MutableLiveData<List<DialerItemModel>>()

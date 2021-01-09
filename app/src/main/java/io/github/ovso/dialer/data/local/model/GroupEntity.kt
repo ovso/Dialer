@@ -11,13 +11,10 @@ data class GroupEntity(
   val groupId: Long,
   @ColumnInfo(name = COLUMN_NAME)
   val name: String,
-  @ColumnInfo(name = COLUMN_INDEX)
-  val index: Int
 ) {
   companion object {
     const val TABLE_NAME = "groups"
     const val COLUMN_GROUP_ID = "groupId"
     const val COLUMN_NAME = "name"
-    const val COLUMN_INDEX = "index"
   }
 }
