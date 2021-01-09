@@ -15,6 +15,9 @@ interface ContactDao {
   @Query("SELECT * FROM contacts")
   fun getContacts(): LiveData<List<ContactEntity>>
 
+  @Query("SELECT * FROM contacts WHERE parent = :groupId")
+  fun getContacts(groupId: Long): LiveData<List<ContactEntity>>
+
   @Insert
   suspend fun insertContact(entity: ContactEntity)
 

@@ -32,16 +32,16 @@ class DialerViewModel @ViewModelInject constructor(
   private val _showAddDialog = MutableLiveData<DialerItemModel>()
   val showAddDialog: LiveData<DialerItemModel> get() = _showAddDialog
 
+  private var args = savedStateHandle.get<DialerArgs>(ARGS) ?: DialerArgs(-1)
+
   init {
-    savedStateHandle.get<DialerArgs>(ARGS)?.let {
-      Logger.d("args: $it")
-    }
     _setupAdapter.value = ::onItemClick
     observe()
   }
 
   private fun observe() {
-    repository.getContacts().observeForever { entities ->
+    Logger.d("groupId: ${args.groupId}")
+    repository.getContacts(args.groupId).observeForever { entities ->
       viewModelScope.launch(Dispatchers.IO) {
         val toDialerItemModels = entities.toDialerItemModels()
         Logger.d("dialerItemModels: $toDialerItemModels")
@@ -61,14 +61,14 @@ class DialerViewModel @ViewModelInject constructor(
   fun onContactsDialogOkClick(model: ContactsDialogModel) {
     Logger.d("model: $model")
     viewModelScope.launch(Dispatchers.IO) {
-      val contactId = System.currentTimeMillis().toStringTime("yyyyMMddHHmmss").toLong()
+      val contactId = System.currentTimeMillis().toStringTime().toLong()
       repository.insertContact(
         entity = ContactEntity(
           contactId = contactId,
           name = model.nm,
           no = model.no,
-          color = "#CCCCCC",
-          parent = 1
+          color = model.color,
+          parent = args.groupId
         )
       )
     }

@@ -25,6 +25,10 @@ class HomeRepositoryImpl @Inject constructor(
     return local.getContacts()
   }
 
+  override fun getContacts(groupId: Long): LiveData<List<ContactEntity>> {
+    return local.getContacts(groupId)
+  }
+
   override suspend fun insertGroup(entity: GroupEntity) {
     return local.insertGroup(entity)
   }
