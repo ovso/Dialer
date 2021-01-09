@@ -22,15 +22,18 @@ class ContactsDialog(
 
   var onOkClickListener: ((ContactsDialogModel) -> Unit)? = null
   var onCancelClickListener: ((ContactsDialogModel) -> Unit)? = null
-  var colorIndex: Int = 0
+  var color: String = context.resources.getStringArray(R.array.picker_colors)[0]
+  var index = 0
   fun show(): ContactsDialog {
     binding.apply {
 
       pickerAddDialog.also { picker ->
-        picker.colors = context.resources.getStringArray(R.array.picker_colors).toList()
-        picker.onItemClickListener = {
-          Logger.d("colorIndex: $it")
-          colorIndex = it
+        val colors = context.resources.getStringArray(R.array.picker_colors).toList()
+        picker.colors = colors
+        picker.onItemClickListener = { index, color ->
+          Logger.d("onItemClick: $index, $color")
+          this@ContactsDialog.color = color
+          this@ContactsDialog.index = index
         }
       }
       tvAddDialogGetNo.setOnClickListener {
@@ -48,7 +51,7 @@ class ContactsDialog(
           ContactsDialogModel(
             nm = binding.etAddDialogNm.text.toString(),
             no = binding.etAddDialogNo.text.toString(),
-            colorIndex = colorIndex
+            color = color
           )
         )
         dialog.dismiss()
@@ -82,6 +85,5 @@ class ContactsDialog(
         binding.etAddDialogNo.setText(no)
       }
     }
-
   }
 }

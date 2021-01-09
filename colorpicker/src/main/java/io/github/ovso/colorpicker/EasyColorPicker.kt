@@ -18,6 +18,9 @@ class EasyColorPicker @JvmOverloads constructor(
   defStyle
 ) {
 
+  var onItemClickListener: ((Int, String) -> Unit)? = null
+  var onItemReselectListener: ((Int, String) -> Unit)? = null
+
   private val binding by lazy {
     ViewEasyColorPickerBinding.inflate(LayoutInflater.from(context), this, true)
   }
@@ -33,21 +36,28 @@ class EasyColorPicker @JvmOverloads constructor(
         newItems?.get(index)?.copy(check = true)?.let {
           newItems.set(index, it)
         }
-        items = newItems
+        items = newItems ?: emptyList()
         submitList(items)
 
         when (checkIndex) {
-          index -> this@EasyColorPicker.onItemReselectListener?.invoke(index)
-          else -> this@EasyColorPicker.onItemClickListener?.invoke(index)
+          index -> {
+            this@EasyColorPicker.onItemReselectListener?.invoke(
+              index,
+              items!![checkIndex].color
+            )
+          }
+          else -> {
+            this@EasyColorPicker.onItemClickListener?.invoke(
+              index,
+              items!![checkIndex].color
+            )
+          }
         }
 
         checkIndex = index
       }
     }
   }
-
-  var onItemClickListener: ((Int) -> Unit)? = null
-  var onItemReselectListener: ((Int) -> Unit)? = null
 
   @ColorRes
   var color: Int? = null
