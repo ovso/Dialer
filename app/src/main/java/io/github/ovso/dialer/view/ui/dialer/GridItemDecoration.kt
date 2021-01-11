@@ -38,7 +38,7 @@ class GridItemDecoration(displayMetrics: DisplayMetrics) : ItemDecoration() {
     ).toInt()
     outerMargin = TypedValue.applyDimension(
       TypedValue.COMPLEX_UNIT_DIP,
-      50f,
+      16f,
       displayMetrics
     ).toInt()
   }

@@ -13,27 +13,14 @@ fun List<ContactEntity>.toDialerItemModels(): List<DialerItemModel> {
           contactId = it.contactId,
           name = it.name,
           no = it.no,
+          color = it.color
         )
       }.toMutableList().apply {
-        add(
-          DialerItemModel(
-            contactId = -1,
-            name = "",
-            no = "",
-            footer = true
-          )
-        )
+        add(DialerItemModel.empty())
       }.toList()
     }
     else -> {
-      listOf(
-        DialerItemModel(
-          contactId = -1,
-          name = "",
-          no = "",
-          footer = true
-        )
-      )
+      listOf(DialerItemModel.empty())
     }
   }
 }

@@ -1,5 +1,7 @@
 package io.github.ovso.dialer.view.ui.dialer.adapter
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -56,6 +58,7 @@ class DialerViewHolder private constructor(
   override fun onBindViewHolder(item: DialerItemModel) {
     binding.apply {
       tvDialerItemName.text = item.name
+      ivDialerItemColor.setImageDrawable(ColorDrawable(Color.parseColor(item.color)))
       root.setOnClickListener {
         clickListener?.invoke(item)
       }
