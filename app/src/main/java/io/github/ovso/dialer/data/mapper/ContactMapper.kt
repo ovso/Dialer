@@ -7,31 +7,24 @@ import io.github.ovso.dialer.data.view.DialerItemModel
 @WorkerThread
 fun List<ContactEntity>.toDialerItemModels(): List<DialerItemModel> {
   return when (count() > 0) {
-    true -> map {
-      DialerItemModel(
-        contactId = it.contactId,
-        name = it.name,
-        no = it.no,
-      )
-    }.apply {
-      toMutableList().also {
-        it.add(
-          DialerItemModel(
-            contactId = 1,
-            name = "",
-            no = "",
-            footer = true
-          )
+    true -> {
+      map {
+        DialerItemModel(
+          contactId = it.contactId,
+          name = it.name,
+          no = it.no,
         )
       }
     }
-    false -> listOf(
-      DialerItemModel(
-        contactId = 1,
-        name = "",
-        no = "",
-        footer = true
+    else -> {
+      listOf(
+        DialerItemModel(
+          contactId = -1,
+          name = "",
+          no = "",
+          footer = true
+        )
       )
-    )
+    }
   }
 }
