@@ -22,7 +22,7 @@ class ContactsDialog(
 
   var onOkClickListener: ((ContactsDialogModel) -> Unit)? = null
   var onCancelClickListener: ((ContactsDialogModel) -> Unit)? = null
-  var color: String = ""
+  var color: String = context.resources.getStringArray(R.array.picker_colors)[0]
   var index = 0
   fun show(): ContactsDialog {
     binding.apply {
