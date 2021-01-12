@@ -52,7 +52,9 @@ class ContactsDialog(
             nm = binding.etAddDialogNm.text.toString(),
             no = binding.etAddDialogNo.text.toString(),
             color = color
-          )
+          ).apply {
+            Logger.d("ContactsDialogModel: $this")
+          }
         )
         dialog.dismiss()
       }
