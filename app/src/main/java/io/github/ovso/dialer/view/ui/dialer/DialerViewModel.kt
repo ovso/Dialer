@@ -59,7 +59,6 @@ class DialerViewModel @ViewModelInject constructor(
   }
 
   fun onContactsDialogOkClick(model: ContactsDialogModel) {
-    Logger.d("model: $model")
     viewModelScope.launch(Dispatchers.IO) {
       val contactId = System.currentTimeMillis().toStringTime().toLong()
       repository.insertContact(

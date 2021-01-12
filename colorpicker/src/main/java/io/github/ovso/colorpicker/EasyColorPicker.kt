@@ -43,13 +43,13 @@ class EasyColorPicker @JvmOverloads constructor(
           index -> {
             this@EasyColorPicker.onItemReselectListener?.invoke(
               index,
-              items!![checkIndex].color
+              items!![index].color
             )
           }
           else -> {
             this@EasyColorPicker.onItemClickListener?.invoke(
               index,
-              items!![checkIndex].color
+              items!![index].color
             )
           }
         }
