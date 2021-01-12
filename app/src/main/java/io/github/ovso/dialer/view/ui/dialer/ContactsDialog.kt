@@ -8,33 +8,38 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AlertDialog
 import androidx.core.database.getStringOrNull
+import androidx.core.widget.doOnTextChanged
 import com.orhanobut.logger.Logger
 import io.github.ovso.dialer.R
+import io.github.ovso.dialer.data.args.ContactDialogArgs
+import io.github.ovso.dialer.data.mapper.toContactDialogModel
 import io.github.ovso.dialer.data.view.ContactsDialogModel
 import io.github.ovso.dialer.databinding.DialogDialerAddNoBinding
 
 class ContactsDialog(
   private val context: Context,
   private val launcher: ActivityResultLauncher<Intent>,
-  private var color:String = context.resources.getStringArray(R.array.picker_colors)[0]
+  private val args: ContactDialogArgs
 ) {
   private var binding: DialogDialerAddNoBinding =
     DialogDialerAddNoBinding.inflate(LayoutInflater.from(context))
 
+  private var model: ContactsDialogModel = args.toContactDialogModel()
+
   var onOkClickListener: ((ContactsDialogModel) -> Unit)? = null
   var onCancelClickListener: ((ContactsDialogModel) -> Unit)? = null
-  var index = 0
+  var colorPickerIndex = 0
+
   fun show(): ContactsDialog {
     binding.apply {
-
       pickerAddDialog.also { picker ->
         val colors = context.resources.getStringArray(R.array.picker_colors).toList()
-        picker.checkIndex = colors.indexOf(color)
+        picker.checkIndex = colors.indexOf(model.color)
         picker.colors = colors
         picker.onItemClickListener = { index, color ->
           Logger.d("onPickerItemClick: $index, $color")
-          this@ContactsDialog.color = color
-          this@ContactsDialog.index = index
+          model.copy(color = color)
+          this@ContactsDialog.colorPickerIndex = index
         }
       }
       tvAddDialogGetNo.setOnClickListener {
@@ -43,20 +48,20 @@ class ContactsDialog(
           launcher.launch(this)
         }
       }
+      etAddDialogNm.setText(model.nm)
+      etAddDialogNo.setText(model.no)
+      etAddDialogNm.doOnTextChanged { text, _, _, _ ->
+        model = model.copy(nm = text.toString())
+      }
+      etAddDialogNo.doOnTextChanged { text, _, _, _ ->
+        model = model.copy(nm = text.toString())
+      }
     }
     AlertDialog.Builder(context).apply {
       setView(binding.root)
       setCancelable(false)
       setPositiveButton(android.R.string.ok) { dialog, _ ->
-        onOkClickListener?.invoke(
-          ContactsDialogModel(
-            nm = binding.etAddDialogNm.text.toString(),
-            no = binding.etAddDialogNo.text.toString(),
-            color = color
-          ).apply {
-            Logger.d("ContactsDialogModel: $this")
-          }
-        )
+        onOkClickListener?.invoke(model)
         dialog.dismiss()
       }
       setNegativeButton(android.R.string.cancel) { dialog, _ ->
@@ -88,5 +93,10 @@ class ContactsDialog(
         binding.etAddDialogNo.setText(no)
       }
     }
+  }
+
+  sealed class Type {
+    object Update : Type()
+    object Insert : Type()
   }
 }

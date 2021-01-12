@@ -7,10 +7,12 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.ovso.dialer.R
 import io.github.ovso.dialer.data.args.ARGS
+import io.github.ovso.dialer.data.args.ContactDialogArgs
 import io.github.ovso.dialer.data.args.DialerArgs
 import io.github.ovso.dialer.databinding.FragmentDialerBinding
 import io.github.ovso.dialer.view.base.DataBindingFragment
@@ -45,7 +47,13 @@ class DialerFragment : DataBindingFragment<FragmentDialerBinding>(R.layout.fragm
       ContactsDialog(
         context = requireContext(),
         launcher = contactsDialogLauncher,
-        color = it.color
+        ContactDialogArgs(
+          name = it.name,
+          no = it.no,
+          color = it.color,
+          type = ContactsDialog.Type.Update,
+          lifecycleCoroutineScope = lifecycleScope
+        )
       ).show().apply {
         contactsDialog = this
       }
@@ -54,7 +62,14 @@ class DialerFragment : DataBindingFragment<FragmentDialerBinding>(R.layout.fragm
     viewModel.showAddDialog.observe(owner) {
       ContactsDialog(
         requireContext(),
-        contactsDialogLauncher
+        contactsDialogLauncher,
+        args = ContactDialogArgs(
+          name = "",
+          no = "",
+          type = ContactsDialog.Type.Insert,
+          color = "",
+          lifecycleCoroutineScope = lifecycleScope
+        )
       ).apply {
         onOkClickListener = viewModel::onContactsDialogOkClick
       }.show().also {
