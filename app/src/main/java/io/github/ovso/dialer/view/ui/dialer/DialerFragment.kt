@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
+import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.ovso.dialer.R
 import io.github.ovso.dialer.data.args.ARGS
@@ -41,9 +41,13 @@ class DialerFragment : DataBindingFragment<FragmentDialerBinding>(R.layout.fragm
     }
 
     viewModel.showEditDialog.observe(owner) {
-      AlertDialog.Builder(requireContext()).apply {
-        setMessage("수정 팝업")
-        show()
+      Logger.d("dialerItemModel: $it")
+      ContactsDialog(
+        context = requireContext(),
+        launcher = contactsDialogLauncher,
+        color = it.color
+      ).show().apply {
+        contactsDialog = this
       }
     }
 

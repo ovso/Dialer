@@ -69,7 +69,7 @@ class EasyColorPicker @JvmOverloads constructor(
 
   private var items: List<ColorModel>? = null
 
-  private var checkIndex: Int = 0
+  var checkIndex: Int = 0
 
   var colors: List<String>? = null
     set(value) {
@@ -79,7 +79,6 @@ class EasyColorPicker @JvmOverloads constructor(
           true -> ColorModel(color = color, check = true)
           else -> ColorModel(color = color)
         }
-
       }
       colorAdapter.submitList(items)
     }

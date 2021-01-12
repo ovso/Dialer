@@ -15,20 +15,21 @@ import io.github.ovso.dialer.databinding.DialogDialerAddNoBinding
 
 class ContactsDialog(
   private val context: Context,
-  private val launcher: ActivityResultLauncher<Intent>
+  private val launcher: ActivityResultLauncher<Intent>,
+  private var color:String = context.resources.getStringArray(R.array.picker_colors)[0]
 ) {
   private var binding: DialogDialerAddNoBinding =
     DialogDialerAddNoBinding.inflate(LayoutInflater.from(context))
 
   var onOkClickListener: ((ContactsDialogModel) -> Unit)? = null
   var onCancelClickListener: ((ContactsDialogModel) -> Unit)? = null
-  var color: String = context.resources.getStringArray(R.array.picker_colors)[0]
   var index = 0
   fun show(): ContactsDialog {
     binding.apply {
 
       pickerAddDialog.also { picker ->
         val colors = context.resources.getStringArray(R.array.picker_colors).toList()
+        picker.checkIndex = colors.indexOf(color)
         picker.colors = colors
         picker.onItemClickListener = { index, color ->
           Logger.d("onPickerItemClick: $index, $color")
