@@ -19,7 +19,7 @@ import io.github.ovso.dialer.databinding.DialogDialerAddNoBinding
 class ContactsDialog(
   private val context: Context,
   private val launcher: ActivityResultLauncher<Intent>,
-  private val args: ContactDialogArgs
+  args: ContactDialogArgs
 ) {
   private var binding: DialogDialerAddNoBinding =
     DialogDialerAddNoBinding.inflate(LayoutInflater.from(context))

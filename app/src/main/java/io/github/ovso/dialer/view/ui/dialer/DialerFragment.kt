@@ -54,8 +54,10 @@ class DialerFragment : DataBindingFragment<FragmentDialerBinding>(R.layout.fragm
           type = ContactsDialog.Type.Update,
           lifecycleCoroutineScope = lifecycleScope
         )
-      ).show().apply {
-        contactsDialog = this
+      ).apply {
+        onOkClickListener = viewModel::onContactsDialogOkClick
+      }.show().also {
+        contactsDialog = it
       }
     }
 

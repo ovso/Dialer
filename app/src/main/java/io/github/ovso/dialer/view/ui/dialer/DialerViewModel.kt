@@ -60,6 +60,15 @@ class DialerViewModel @ViewModelInject constructor(
 
   fun onContactsDialogOkClick(model: ContactsDialogModel) {
     viewModelScope.launch(Dispatchers.IO) {
+      when(model.type) {
+        is ContactsDialog.Type.Insert -> {
+          Logger.d("Insert")
+        }
+        is ContactsDialog.Type.Update -> {
+          Logger.d("Update")
+        }
+      }
+/*
       val contactId = System.currentTimeMillis().toStringTime().toLong()
       repository.insertContact(
         entity = ContactEntity(
@@ -70,6 +79,7 @@ class DialerViewModel @ViewModelInject constructor(
           parent = args.groupId
         )
       )
+*/
     }
   }
 }
