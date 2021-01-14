@@ -41,6 +41,10 @@ class HomeRepositoryImpl @Inject constructor(
     local.insertContact(entity)
   }
 
+  override suspend fun updateContact(entity: ContactEntity) {
+    local.updateContact(entity)
+  }
+
   override suspend fun deleteContact(entity: ContactEntity) {
     local.deleteContact(entity)
   }

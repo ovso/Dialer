@@ -39,6 +39,10 @@ class LocalDataSourceImpl @Inject constructor(@ActivityContext context: Context)
     database.contactDao().insertContact(entity)
   }
 
+  override suspend fun updateContact(entity: ContactEntity) {
+    database.contactDao().updateContact(entity)
+  }
+
   override suspend fun deleteContact(entity: ContactEntity) {
     database.contactDao().deleteContact(entity)
   }

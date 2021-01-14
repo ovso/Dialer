@@ -1,10 +1,7 @@
 package io.github.ovso.dialer.data.local
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import io.github.ovso.dialer.data.local.model.ContactEntity
 
 @Dao
@@ -20,6 +17,9 @@ interface ContactDao {
 
   @Insert
   suspend fun insertContact(entity: ContactEntity)
+
+  @Update
+  suspend fun updateContact(entity: ContactEntity)
 
   @Delete
   suspend fun deleteContact(entity: ContactEntity)

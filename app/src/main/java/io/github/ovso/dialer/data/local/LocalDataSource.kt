@@ -12,5 +12,6 @@ interface LocalDataSource {
   suspend fun insertGroup(entity: GroupEntity)
   suspend fun deleteGroup(entity: GroupEntity)
   suspend fun insertContact(entity: ContactEntity)
+  suspend fun updateContact(entity: ContactEntity)
   suspend fun deleteContact(entity: ContactEntity)
 }
