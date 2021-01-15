@@ -70,6 +70,9 @@ class EasyColorPicker @JvmOverloads constructor(
   private var items: List<ColorModel>? = null
 
   var checkIndex: Int = 0
+    set(value) {
+      field = if (value > -1) value else 0
+    }
 
   var colors: List<String>? = null
     set(value) {
