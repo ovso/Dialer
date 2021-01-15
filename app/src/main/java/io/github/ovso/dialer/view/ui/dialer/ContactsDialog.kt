@@ -37,8 +37,8 @@ class ContactsDialog(
         picker.checkIndex = colors.indexOf(model.color)
         picker.colors = colors
         picker.onItemClickListener = { index, color ->
-          Logger.d("onPickerItemClick: $index, $color")
-          model.copy(color = color)
+          model = model.copy(color = color)
+          Logger.d("model: $model")
           this@ContactsDialog.colorPickerIndex = index
         }
       }

@@ -8,6 +8,7 @@ import io.github.ovso.dialer.data.HomeRepository
 import io.github.ovso.dialer.data.args.ARGS
 import io.github.ovso.dialer.data.args.DialerArgs
 import io.github.ovso.dialer.data.local.model.ContactEntity
+import io.github.ovso.dialer.data.mapper.toContactEntity
 import io.github.ovso.dialer.data.mapper.toDialerItemModels
 import io.github.ovso.dialer.data.view.ContactsDialogModel
 import io.github.ovso.dialer.data.view.DialerItemModel
@@ -76,6 +77,14 @@ class DialerViewModel @ViewModelInject constructor(
         }
         is ContactsDialog.Type.Update -> {
           Logger.d("Update")
+          _showEditDialog.value?.let { dialerItemModel ->
+            repository.updateContact(
+              model.toContactEntity(
+                contactId = dialerItemModel.contactId,
+                parent = args.groupId
+              )
+            )
+          }
         }
       }
     }

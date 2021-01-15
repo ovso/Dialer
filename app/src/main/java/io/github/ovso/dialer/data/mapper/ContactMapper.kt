@@ -36,3 +36,14 @@ fun ContactDialogArgs.toContactDialogModel(): ContactsDialogModel {
     type = type
   )
 }
+
+@WorkerThread
+fun ContactsDialogModel.toContactEntity(contactId: Long, parent: Long): ContactEntity {
+  return ContactEntity(
+    contactId = contactId,
+    name = nm,
+    no = no,
+    color = color,
+    parent = parent
+  )
+}
