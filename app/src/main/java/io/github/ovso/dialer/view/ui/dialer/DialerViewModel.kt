@@ -72,7 +72,9 @@ class DialerViewModel @ViewModelInject constructor(
               no = model.no,
               color = model.color,
               parent = args.groupId
-            )
+            ).apply {
+              Logger.d("entity: $this")
+            }
           )
         }
         is ContactsDialog.Type.Update -> {

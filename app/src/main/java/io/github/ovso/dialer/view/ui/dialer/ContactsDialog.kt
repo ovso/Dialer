@@ -30,11 +30,13 @@ class ContactsDialog(
   var onCancelClickListener: ((ContactsDialogModel) -> Unit)? = null
   var colorPickerIndex = 0
 
+
   fun show(): ContactsDialog {
     binding.apply {
       pickerAddDialog.also { picker ->
         val colors = context.resources.getStringArray(R.array.picker_colors).toList()
         picker.checkIndex = colors.indexOf(model.color)
+        model = model.copy(color = colors[picker.checkIndex])
         picker.colors = colors
         picker.onItemClickListener = { index, color ->
           model = model.copy(color = color)
