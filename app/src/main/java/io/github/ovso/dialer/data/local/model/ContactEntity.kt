@@ -10,7 +10,8 @@ import androidx.room.PrimaryKey
   foreignKeys = [ForeignKey(
     entity = GroupEntity::class,
     parentColumns = arrayOf(GroupEntity.COLUMN_GROUP_ID),
-    childColumns = arrayOf(ContactEntity.COLUMN_PARENT)
+    childColumns = arrayOf(ContactEntity.COLUMN_PARENT),
+    onDelete = ForeignKey.CASCADE
   )]
 )
 data class ContactEntity(
