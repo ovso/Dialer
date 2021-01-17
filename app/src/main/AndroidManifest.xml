@@ -13,9 +13,9 @@
     android:theme="@style/Theme.Dialer"
     tools:ignore="AllowBackup">
     <activity
-      android:name=".view.ui.main.MainActivity2"
+      android:name=".view.ui.splash.SplashActivity"
       android:screenOrientation="portrait"
-      android:theme="@style/Theme.Dialer.NoActionBar"
+      android:theme="@style/AppTheme.Launcher"
       tools:ignore="LockedOrientationActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -23,6 +23,11 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+    <activity
+      android:name=".view.ui.main.MainActivity2"
+      android:screenOrientation="portrait"
+      android:theme="@style/Theme.Dialer.NoActionBar"
+      tools:ignore="LockedOrientationActivity" />
 
     <meta-data
       android:name="com.google.android.gms.ads.APPLICATION_ID"
@@ -33,35 +38,19 @@
       android:label="@string/app_name"
       android:screenOrientation="portrait"
       android:theme="@style/Theme.Dialer.NoActionBar"
-      tools:ignore="LockedOrientationActivity">
-      <!--
-            <intent-filter>
-              <action android:name="android.intent.action.MAIN" />
-
-              <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-      -->
-    </activity>
+      tools:ignore="LockedOrientationActivity" />
 
     <provider
       android:name="androidx.startup.InitializationProvider"
       android:authorities="${applicationId}.androidx-startup"
       android:exported="false"
       tools:node="merge">
-
       <meta-data
         android:name="io.github.ovso.dialer.app.TimberInitializer"
         android:value="androidx.startup" />
-
       <meta-data
         android:name="io.github.ovso.dialer.app.LoggerInitializer"
         android:value="androidx.startup" />
-
-      <!--
-            <meta-data
-              android:name="io.github.ovso.dialer.app.DatabaseInitializer"
-              android:value="androidx.startup" />
-      -->
     </provider>
   </application>
 

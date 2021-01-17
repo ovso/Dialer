@@ -56,8 +56,8 @@ class DialerFragment : DataBindingFragment<FragmentDialerBinding>(R.layout.fragm
         )
       ).apply {
         onOkClickListener = viewModel::onContactsDialogOkClick
-      }.show().also {
-        contactsDialog = it
+      }.show().also { dialog ->
+        contactsDialog = dialog
       }
     }
 
