@@ -33,6 +33,10 @@ class HomeRepositoryImpl @Inject constructor(
     return local.insertGroup(entity)
   }
 
+  override suspend fun updateGroup(entity: GroupEntity) {
+    return local.updateGroup(entity)
+  }
+
   override suspend fun deleteGroup(entity: GroupEntity) {
     return local.deleteGroup(entity)
   }

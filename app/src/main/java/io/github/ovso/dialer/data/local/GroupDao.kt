@@ -1,10 +1,7 @@
 package io.github.ovso.dialer.data.local
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import io.github.ovso.dialer.data.local.model.GroupEntity
 
 @Dao
@@ -14,6 +11,9 @@ interface GroupDao {
 
   @Insert
   suspend fun insertGroup(entity: GroupEntity)
+
+  @Update
+  suspend fun updateGroup(entity: GroupEntity)
 
   @Delete
   suspend fun deleteGroup(entity: GroupEntity)

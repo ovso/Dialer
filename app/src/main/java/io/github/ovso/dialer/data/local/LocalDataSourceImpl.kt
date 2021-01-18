@@ -31,6 +31,10 @@ class LocalDataSourceImpl @Inject constructor(@ActivityContext context: Context)
     database.groupDao().insertGroup(entity)
   }
 
+  override suspend fun updateGroup(entity: GroupEntity) {
+    database.groupDao().updateGroup(entity)
+  }
+
   override suspend fun deleteGroup(entity: GroupEntity) {
     database.groupDao().deleteGroup(entity)
   }

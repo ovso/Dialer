@@ -13,7 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HomeViewModel @ViewModelInject constructor(
-  private val homeRepository: HomeRepository
+  private val repository: HomeRepository
 ) : ViewModel() {
 
   private lateinit var groupsObserver: Observer<List<GroupEntity>>
@@ -30,7 +30,7 @@ class HomeViewModel @ViewModelInject constructor(
   val showAddDialog: LiveData<((String) -> Unit)> get() = _showAddDialog
 
   init {
-    Logger.d("homeRepository: $homeRepository")
+    Logger.d("homeRepository: $repository")
     observe()
   }
 
@@ -41,14 +41,14 @@ class HomeViewModel @ViewModelInject constructor(
         _groups.postValue(it.toGroupModels())
       }
     }
-    homeRepository.getGroups().observeForever(groupsObserver)
+    repository.getGroups().observeForever(groupsObserver)
   }
 
   fun onFabClick() {
     _showAddDialog.value = { text ->
-      viewModelScope.launch(Dispatchers.IO) {
+      viewModelScope.launch(Dispatchers.Default) {
         val groupId = System.currentTimeMillis().toStringTime().toLong()
-        homeRepository.insertGroup(
+        repository.insertGroup(
           GroupEntity(
             groupId = groupId,
             name = text
@@ -60,13 +60,21 @@ class HomeViewModel @ViewModelInject constructor(
 
   override fun onCleared() {
     super.onCleared()
-    homeRepository.getGroups().removeObserver(groupsObserver)
+    repository.getGroups().removeObserver(groupsObserver)
   }
 
   fun onDeleteGroupClick(position: Int) {
-    viewModelScope.launch(Dispatchers.IO) {
+    viewModelScope.launch(Dispatchers.Default) {
       _groups.value?.let { models ->
-        homeRepository.deleteGroup(models[position].toGroupEntity())
+        repository.deleteGroup(models[position].toGroupEntity())
+      }
+    }
+  }
+
+  fun onUpdateGroupNameClick(position: Int, name: String) {
+    _groups.value?.let {
+      viewModelScope.launch(Dispatchers.Default) {
+        repository.updateGroup(it[position].toGroupEntity(name))
       }
     }
   }
