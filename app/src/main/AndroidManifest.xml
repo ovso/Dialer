@@ -3,6 +3,9 @@
   xmlns:tools="http://schemas.android.com/tools"
   package="io.github.ovso.dialer">
 
+  <uses-permission android:name="android.permission.CALL_PHONE" />
+  <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
   <application
     android:name=".app.DialerApplication"
     android:allowBackup="false"
