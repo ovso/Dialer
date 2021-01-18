@@ -26,8 +26,11 @@ class HomeViewModel @ViewModelInject constructor(
   }
   val text: LiveData<String> = _text
 
-  private val _showAddDialog = MutableLiveData<((String) -> Unit)>()
-  val showAddDialog: LiveData<((String) -> Unit)> get() = _showAddDialog
+  private val _showGroupAddDialog = MutableLiveData<((String) -> Unit)>()
+  val showGroupAddDialog: LiveData<((String) -> Unit)> get() = _showGroupAddDialog
+
+  private val _showGroupModifyDialog = MutableLiveData<GroupModel>()
+  val showGroupModifyDialog: LiveData<GroupModel> get() = _showGroupModifyDialog
 
   init {
     Logger.d("homeRepository: $repository")
@@ -45,7 +48,7 @@ class HomeViewModel @ViewModelInject constructor(
   }
 
   fun onFabClick() {
-    _showAddDialog.value = { text ->
+    _showGroupAddDialog.value = { text ->
       viewModelScope.launch(Dispatchers.Default) {
         val groupId = System.currentTimeMillis().toStringTime().toLong()
         repository.insertGroup(
@@ -76,6 +79,12 @@ class HomeViewModel @ViewModelInject constructor(
       viewModelScope.launch(Dispatchers.Default) {
         repository.updateGroup(it[position].toGroupEntity(name))
       }
+    }
+  }
+
+  fun onTabReselected(tabPosition: Int) {
+    _groups.value?.let {
+      _showGroupModifyDialog.value = it[tabPosition]
     }
   }
 }
