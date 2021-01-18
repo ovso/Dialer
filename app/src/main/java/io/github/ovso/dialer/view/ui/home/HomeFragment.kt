@@ -7,12 +7,14 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.ovso.dialer.R
 import io.github.ovso.dialer.data.HomeRepository
+import io.github.ovso.dialer.data.mapper.toGroupModifyDialogModel
 import io.github.ovso.dialer.databinding.DialogHomeAddGroupBinding
 import io.github.ovso.dialer.databinding.FragmentHomeBinding
 import io.github.ovso.dialer.view.base.DataBindingFragment
@@ -54,17 +56,7 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
     binding.tabs.addOnTabSelectedListener(object : OnSimpleTabSelectedListener() {
       override fun onTabReselected(tab: TabLayout.Tab) {
         super.onTabReselected(tab)
-        GroupModifyDialog(
-          context = requireContext(),
-          tabText = tab.text.toString()
-        ).apply {
-          onDelClickListener = {
-            viewModel.onDeleteGroupClick(tab.position)
-          }
-          onOkClickListener = { newGroupName ->
-            viewModel.onUpdateGroupNameClick(position = tab.position, name = newGroupName)
-          }
-        }.show()
+        viewModel.onTabReselected(tab.position)
       }
     })
   }
@@ -75,7 +67,7 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
 
   private fun observe() {
     val owner = viewLifecycleOwner
-    viewModel.showAddDialog.observe(owner) {
+    viewModel.showGroupAddDialog.observe(owner) {
       showAddDialog(it)
     }
 
@@ -83,6 +75,17 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
       adapter.items2.clear()
       adapter.items2.addAll(it)
       adapter.notifyDataSetChanged()
+    }
+
+    viewModel.showGroupModifyDialog.observe(owner) {
+      val selectedTabPosition = binding.tabs.selectedTabPosition
+      GroupModifyDialog(
+        context = requireContext(),
+        tabText = binding.tabs.getTabAt(selectedTabPosition)?.text.toString(),
+        lifecycleCoroutineScope = lifecycleScope,
+        repository = repository,
+        model = it.toGroupModifyDialogModel()
+      ).show()
     }
   }
 

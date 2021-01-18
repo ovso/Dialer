@@ -5,7 +5,6 @@ import androidx.lifecycle.*
 import com.orhanobut.logger.Logger
 import io.github.ovso.dialer.data.HomeRepository
 import io.github.ovso.dialer.data.local.model.GroupEntity
-import io.github.ovso.dialer.data.mapper.toGroupEntity
 import io.github.ovso.dialer.data.mapper.toGroupModels
 import io.github.ovso.dialer.data.view.GroupModel
 import io.github.ovso.dialer.extensions.toStringTime
@@ -21,13 +20,11 @@ class HomeViewModel @ViewModelInject constructor(
   private val _groups = MutableLiveData<List<GroupModel>>()
   val groups: MutableLiveData<List<GroupModel>> = _groups
 
-  private val _text = MutableLiveData<String>().apply {
-    value = "This is home Fragment"
-  }
-  val text: LiveData<String> = _text
+  private val _showGroupAddDialog = MutableLiveData<((String) -> Unit)>()
+  val showGroupAddDialog: LiveData<((String) -> Unit)> get() = _showGroupAddDialog
 
-  private val _showAddDialog = MutableLiveData<((String) -> Unit)>()
-  val showAddDialog: LiveData<((String) -> Unit)> get() = _showAddDialog
+  private val _showGroupModifyDialog = MutableLiveData<GroupModel>()
+  val showGroupModifyDialog: LiveData<GroupModel> get() = _showGroupModifyDialog
 
   init {
     Logger.d("homeRepository: $repository")
@@ -45,7 +42,7 @@ class HomeViewModel @ViewModelInject constructor(
   }
 
   fun onFabClick() {
-    _showAddDialog.value = { text ->
+    _showGroupAddDialog.value = { text ->
       viewModelScope.launch(Dispatchers.Default) {
         val groupId = System.currentTimeMillis().toStringTime().toLong()
         repository.insertGroup(
@@ -63,19 +60,9 @@ class HomeViewModel @ViewModelInject constructor(
     repository.getGroups().removeObserver(groupsObserver)
   }
 
-  fun onDeleteGroupClick(position: Int) {
-    viewModelScope.launch(Dispatchers.Default) {
-      _groups.value?.let { models ->
-        repository.deleteGroup(models[position].toGroupEntity())
-      }
-    }
-  }
-
-  fun onUpdateGroupNameClick(position: Int, name: String) {
+  fun onTabReselected(tabPosition: Int) {
     _groups.value?.let {
-      viewModelScope.launch(Dispatchers.Default) {
-        repository.updateGroup(it[position].toGroupEntity(name))
-      }
+      _showGroupModifyDialog.value = it[tabPosition]
     }
   }
 }
