@@ -22,9 +22,6 @@ class GroupModifyDialog(
   private val model: GroupModifyDialogModel
 ) {
 
-  var onOkClickListener: ((String) -> Unit)? = null
-  var onDelClickListener: (() -> Unit)? = null
-
   fun show() {
     val binding = DialogEditTabNameBinding.inflate(LayoutInflater.from(context))
     binding.etDialogEditGroupName.setText(tabText)
@@ -38,13 +35,10 @@ class GroupModifyDialog(
             entity = model.toGroupEntity(binding.etDialogEditGroupName.text.toString())
           )
         }
-
-        onOkClickListener?.invoke(binding.etDialogEditGroupName.text.toString())
       }
       setNegativeButton(android.R.string.cancel, null)
       setNeutralButton(R.string.all_tab_del) { dialog, _ ->
         dialog.dismiss()
-        onDelClickListener?.invoke()
         lifecycleCoroutineScope.launch(Dispatchers.Default) {
           repository.deleteGroup(
             entity = model.toGroupEntity()

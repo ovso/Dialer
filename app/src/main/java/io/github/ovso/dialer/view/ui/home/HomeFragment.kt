@@ -61,20 +61,6 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
     })
   }
 
-  /*
-        GroupModifyDialog(
-          context = requireContext(),
-          tabText = tab.text.toString()
-        ).apply {
-          onDelClickListener = {
-            viewModel.onDeleteGroupClick(tab.position)
-          }
-          onOkClickListener = { newGroupName ->
-            viewModel.onUpdateGroupNameClick(position = tab.position, name = newGroupName)
-          }
-        }.show()
-*/
-
   private fun setupVp() {
     binding.vpHome.adapter = adapter
   }
