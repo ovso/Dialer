@@ -22,4 +22,7 @@
   <string name="home_delete_group_dialog_msg">%s 그룹을 삭제할까요?</string>
   <string name="all_home_edit_group">그룹 편집</string>
   <string name="all_tab_del">그룹 제거</string>
+  <string name="permission_not_granted_msg">%s에서 전화를 걸고 관리하도록 허용하셔야 합니다.</string>
+  <string name="go_to_settings">설정으로 이동</string>
+  <string name="end">종료</string>
 </resources>

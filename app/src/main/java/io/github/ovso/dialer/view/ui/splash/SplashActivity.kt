@@ -3,11 +3,13 @@ package io.github.ovso.dialer.view.ui.splash
 import android.Manifest
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.registerForActivityResult
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.orhanobut.logger.Logger
+import io.github.ovso.dialer.R
 import io.github.ovso.dialer.view.ui.main.MainActivity2
 
 class SplashActivity : AppCompatActivity() {
@@ -27,11 +29,27 @@ class SplashActivity : AppCompatActivity() {
           }
         }
         false -> {
+          val appName = getString(R.string.app_name)
+          val msg = getString(R.string.permission_not_granted_msg, appName)
           AlertDialog.Builder(this)
-            .setTitle("권한을 설정하셔야 합니다.")
-            .setMessage("권한을 설정해주세요.")
-            .setPositiveButton(android.R.string.ok, null)
-            .setNegativeButton(android.R.string.cancel, null)
+            .setIcon(R.drawable.ic_warning)
+            .setMessage(msg)
+            .setPositiveButton(R.string.end) { dialog, _ ->
+              dialog.dismiss()
+              finish()
+            }
+            .setNeutralButton(R.string.go_to_settings) { dialog, _ ->
+              dialog.dismiss()
+              val actionMain = Intent(Intent.ACTION_MAIN)
+                .setAction(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
+              val mSettingsIntent: Intent = actionMain
+              try {
+                startActivity(mSettingsIntent)
+              } catch (ex: Exception) {
+                Logger.e(ex, ex.message.toString())
+              }
+              finish()
+            }
             .show()
         }
       }
