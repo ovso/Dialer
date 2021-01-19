@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.registerForActivityResult
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.orhanobut.logger.Logger
 import io.github.ovso.dialer.view.ui.main.MainActivity2
@@ -26,7 +27,12 @@ class SplashActivity : AppCompatActivity() {
           }
         }
         false -> {
-          Logger.d("퍼미션 거부..")
+          AlertDialog.Builder(this)
+            .setTitle("권한을 설정하셔야 합니다.")
+            .setMessage("권한을 설정해주세요.")
+            .setPositiveButton(android.R.string.ok, null)
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
         }
       }
     }
