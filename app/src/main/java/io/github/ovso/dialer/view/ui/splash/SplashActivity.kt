@@ -22,39 +22,48 @@ class SplashActivity : AppCompatActivity() {
     ) { isGranted ->
       Logger.d("isGranted: $isGranted")
       when (isGranted) {
-        true -> {
-          Intent(this, MainActivity2::class.java).apply {
-            startActivity(this)
-            finish()
-          }
-        }
-        false -> {
-          val appName = getString(R.string.app_name)
-          val msg = getString(R.string.permission_not_granted_msg, appName)
-          AlertDialog.Builder(this)
-            .setIcon(R.drawable.ic_warning)
-            .setMessage(msg)
-            .setPositiveButton(R.string.end) { dialog, _ ->
-              dialog.dismiss()
-              finish()
-            }
-            .setNeutralButton(R.string.go_to_settings) { dialog, _ ->
-              dialog.dismiss()
-              val actionMain = Intent(Intent.ACTION_MAIN)
-                .setAction(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
-              val mSettingsIntent: Intent = actionMain
-              try {
-                startActivity(mSettingsIntent)
-              } catch (ex: Exception) {
-                Logger.e(ex, ex.message.toString())
-              }
-              finish()
-            }
-            .show()
-        }
+        true -> navigateToMain()
+        false -> showNotGrantedDialog()
       }
     }
 
     requestLocation.launch(Unit)
+  }
+
+  private fun showNotGrantedDialog() {
+    val appName = getString(R.string.app_name)
+    val msg = getString(R.string.permission_not_granted_msg, appName)
+    AlertDialog.Builder(this)
+      .setIcon(R.drawable.ic_warning)
+      .setMessage(msg)
+      .setCancelable(false)
+      .setPositiveButton(R.string.end) { dialog, _ ->
+        dialog.dismiss()
+        finish()
+      }
+      .setNeutralButton(R.string.go_to_settings) { dialog, _ ->
+        dialog.dismiss()
+        navigateToSetting()
+        finish()
+      }
+      .show()
+  }
+
+  private fun navigateToSetting() {
+    try {
+      Intent(Intent.ACTION_MAIN).apply {
+        action = Settings.ACTION_MANAGE_OVERLAY_PERMISSION
+        startActivity(this)
+      }
+    } catch (ex: Exception) {
+      Logger.e(ex, ex.message.toString())
+    }
+  }
+
+  private fun navigateToMain() {
+    Intent(this, MainActivity2::class.java).apply {
+      startActivity(this)
+      finish()
+    }
   }
 }
