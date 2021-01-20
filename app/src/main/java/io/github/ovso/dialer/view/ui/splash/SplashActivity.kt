@@ -2,6 +2,7 @@ package io.github.ovso.dialer.view.ui.splash
 
 import android.Manifest
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import androidx.activity.result.contract.ActivityResultContracts
@@ -51,8 +52,10 @@ class SplashActivity : AppCompatActivity() {
 
   private fun navigateToSetting() {
     try {
-      Intent(Intent.ACTION_MAIN).apply {
-        action = Settings.ACTION_MANAGE_OVERLAY_PERMISSION
+      Intent(
+        Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+        Uri.parse("package:$packageName")
+      ).apply {
         startActivity(this)
       }
     } catch (ex: Exception) {
