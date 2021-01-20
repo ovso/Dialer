@@ -9,8 +9,17 @@ import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 
 class GridItemDecoration(displayMetrics: DisplayMetrics) : ItemDecoration() {
   private val spanCount = 3
-  private val spacing: Int
-  private val outerMargin: Int
+  private val spacing: Int = TypedValue.applyDimension(
+    TypedValue.COMPLEX_UNIT_DIP,
+    10f,
+    displayMetrics
+  ).toInt()
+  private val outerMargin: Int = TypedValue.applyDimension(
+    TypedValue.COMPLEX_UNIT_DIP,
+    0f,
+    displayMetrics
+  ).toInt()
+
   override fun getItemOffsets(
     outRect: Rect,
     view: View,
@@ -30,16 +39,4 @@ class GridItemDecoration(displayMetrics: DisplayMetrics) : ItemDecoration() {
     }
   }
 
-  init {
-    spacing = TypedValue.applyDimension(
-      TypedValue.COMPLEX_UNIT_DIP,
-      12f,
-      displayMetrics
-    ).toInt()
-    outerMargin = TypedValue.applyDimension(
-      TypedValue.COMPLEX_UNIT_DIP,
-      16f,
-      displayMetrics
-    ).toInt()
-  }
 }
