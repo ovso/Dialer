@@ -1,7 +1,9 @@
 package io.github.ovso.dialer.view.ui.dialer
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
 import android.provider.ContactsContract
 import android.view.LayoutInflater
 import androidx.activity.result.ActivityResult
@@ -77,7 +79,9 @@ class ContactsDialog(
           onDelClickListener?.invoke(model)
         }
       }
-      show()
+      show().apply {
+        this.getButton(DialogInterface.BUTTON_NEUTRAL).setTextColor(Color.RED)
+      }
     }
 
     return this

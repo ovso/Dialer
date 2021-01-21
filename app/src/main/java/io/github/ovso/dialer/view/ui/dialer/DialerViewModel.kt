@@ -60,40 +60,46 @@ class DialerViewModel @ViewModelInject constructor(
   }
 
   fun onContactsDialogOkClick(model: ContactsDialogModel) {
+
+    suspend fun insertContact(model: ContactsDialogModel) {
+      val contactId = System.currentTimeMillis().toStringTime().toLong()
+      repository.insertContact(
+        entity = ContactEntity(
+          contactId = contactId,
+          name = model.nm,
+          no = model.no,
+          color = model.color,
+          parent = args.groupId
+        ).apply {
+          Logger.d("entity: $this")
+        }
+      )
+    }
+
+    suspend fun updateContact(model: ContactsDialogModel) {
+      _showEditDialog.value?.let { dialerItemModel ->
+        repository.updateContact(
+          model.toContactEntity(
+            contactId = dialerItemModel.contactId,
+            parent = args.groupId
+          )
+        )
+      }
+    }
+
     viewModelScope.launch(Dispatchers.IO) {
       when (model.type) {
-        is ContactsDialog.Type.Insert -> {
-          Logger.d("Insert")
-          val contactId = System.currentTimeMillis().toStringTime().toLong()
-          repository.insertContact(
-            entity = ContactEntity(
-              contactId = contactId,
-              name = model.nm,
-              no = model.no,
-              color = model.color,
-              parent = args.groupId
-            ).apply {
-              Logger.d("entity: $this")
-            }
-          )
-        }
-        is ContactsDialog.Type.Update -> {
-          Logger.d("Update")
-          _showEditDialog.value?.let { dialerItemModel ->
-            repository.updateContact(
-              model.toContactEntity(
-                contactId = dialerItemModel.contactId,
-                parent = args.groupId
-              )
-            )
-          }
-        }
+        is ContactsDialog.Type.Insert -> insertContact(model)
+        is ContactsDialog.Type.Update -> updateContact(model)
       }
     }
   }
 
   fun onContactsDialogDelClick(model: ContactsDialogModel) {
     viewModelScope.launch(Dispatchers.IO) {
+      _showEditDialog.value?.let {
+        repository.deleteContact(model.toContactEntity(it.contactId, args.groupId))
+      }
     }
   }
 }
