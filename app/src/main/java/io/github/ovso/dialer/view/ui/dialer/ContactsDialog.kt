@@ -19,7 +19,7 @@ import io.github.ovso.dialer.databinding.DialogDialerAddNoBinding
 class ContactsDialog(
   private val context: Context,
   private val launcher: ActivityResultLauncher<Intent>,
-  args: ContactDialogArgs
+  private val args: ContactDialogArgs
 ) {
   private var binding: DialogDialerAddNoBinding =
     DialogDialerAddNoBinding.inflate(LayoutInflater.from(context))
@@ -27,9 +27,9 @@ class ContactsDialog(
   private var model: ContactsDialogModel = args.toContactDialogModel()
 
   var onOkClickListener: ((ContactsDialogModel) -> Unit)? = null
+  var onDelClickListener: ((ContactsDialogModel) -> Unit)? = null
   var onCancelClickListener: ((ContactsDialogModel) -> Unit)? = null
   var colorPickerIndex = 0
-
 
   fun show(): ContactsDialog {
     binding.apply {
@@ -70,6 +70,12 @@ class ContactsDialog(
       }
       setNegativeButton(android.R.string.cancel) { dialog, _ ->
         dialog.dismiss()
+      }
+      if(Type.Update == args.type) {
+        setNeutralButton(R.string.all_delete_contact) { dialog, _ ->
+          dialog.dismiss()
+          onDelClickListener?.invoke(model)
+        }
       }
       show()
     }

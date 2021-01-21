@@ -91,4 +91,9 @@ class DialerViewModel @ViewModelInject constructor(
       }
     }
   }
+
+  fun onContactsDialogDelClick(model: ContactsDialogModel) {
+    viewModelScope.launch(Dispatchers.IO) {
+    }
+  }
 }
