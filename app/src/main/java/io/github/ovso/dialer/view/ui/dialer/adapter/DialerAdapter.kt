@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -59,8 +60,14 @@ class DialerViewHolder private constructor(
     binding.apply {
       tvDialerItemName.text = item.name
       ivDialerItemColor.setImageDrawable(ColorDrawable(Color.parseColor(item.color)))
-      root.setOnClickListener {
-        clickListener?.invoke(item)
+      root.apply {
+        setOnClickListener {
+          clickListener?.invoke(item)
+        }
+        setOnLongClickListener {
+          Toast.makeText(context, "통화하기", Toast.LENGTH_SHORT).show()
+          true
+        }
       }
     }
   }
