@@ -4,13 +4,13 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import io.github.ovso.dialer.data.view.DialerItemModel
 import io.github.ovso.dialer.databinding.ItemDialerBinding
 import io.github.ovso.dialer.databinding.ItemDialerFooterBinding
+import io.github.ovso.dialer.extensions.makeCall
 
 class DialerAdapter : ListAdapter<DialerItemModel, RecyclerView.ViewHolder>(diffCallback) {
 
@@ -65,7 +65,7 @@ class DialerViewHolder private constructor(
           clickListener?.invoke(item)
         }
         setOnLongClickListener {
-          Toast.makeText(context, "통화하기", Toast.LENGTH_SHORT).show()
+          it.context.makeCall(item.no)
           true
         }
       }
