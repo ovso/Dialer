@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.provider.ContactsContract
 import android.view.LayoutInflater
 import androidx.activity.result.ActivityResult
@@ -52,6 +53,14 @@ class ContactsDialog(
           launcher.launch(this)
         }
       }
+      tvAddDialogSms.setOnClickListener {
+        val no = etAddDialogNo.text.toString()
+        Intent(Intent.ACTION_SENDTO, Uri.parse("sms:$no")).apply {
+          putExtra("sms_body", "")
+          it.context.startActivity(this)
+        }
+      }
+
       etAddDialogNm.setText(model.nm)
       etAddDialogNo.setText(model.no)
       etAddDialogNm.doOnTextChanged { text, _, _, _ ->
@@ -73,7 +82,7 @@ class ContactsDialog(
       setNegativeButton(android.R.string.cancel) { dialog, _ ->
         dialog.dismiss()
       }
-      if(Type.Update == args.type) {
+      if (Type.Update == args.type) {
         setNeutralButton(R.string.all_delete_contact) { dialog, _ ->
           dialog.dismiss()
           onDelClickListener?.invoke(model)
