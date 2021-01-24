@@ -86,7 +86,6 @@ class DialerFragment : DataBindingFragment<FragmentDialerBinding>(R.layout.fragm
       contactsDialog?.onContactsResult(it)
     }
 
-
   companion object {
     fun newInstance(args: DialerArgs): DialerFragment {
       return DialerFragment().apply {
@@ -94,5 +93,4 @@ class DialerFragment : DataBindingFragment<FragmentDialerBinding>(R.layout.fragm
       }
     }
   }
-
 }
