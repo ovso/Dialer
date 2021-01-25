@@ -35,6 +35,7 @@ class DialerFragment : DataBindingFragment<FragmentDialerBinding>(R.layout.fragm
     viewModel.items.observe(owner) {
       adapter.submitList(it)
     }
+
     viewModel.setupAdapter.observe(owner) { listener ->
       binding.rvDialer.apply {
         adapter = this@DialerFragment.adapter.apply { itemClickListener = listener }
