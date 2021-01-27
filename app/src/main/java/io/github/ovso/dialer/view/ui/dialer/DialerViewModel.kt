@@ -69,7 +69,7 @@ class DialerViewModel @ViewModelInject constructor(
           name = model.nm,
           no = model.no,
           color = model.color,
-          parent = args.groupId
+          parent = model.groupId
         ).apply {
           Logger.d("entity: $this")
         }
@@ -81,7 +81,7 @@ class DialerViewModel @ViewModelInject constructor(
         repository.updateContact(
           model.toContactEntity(
             contactId = dialerItemModel.contactId,
-            parent = args.groupId
+            parent = model.groupId
           )
         )
       }

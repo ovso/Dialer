@@ -6,5 +6,6 @@ data class ContactsDialogModel(
   val nm: String,
   val no: String,
   val color: String,
-  val type:ContactsDialog.Type
+  val type:ContactsDialog.Type,
+  val groupId:Long
 )

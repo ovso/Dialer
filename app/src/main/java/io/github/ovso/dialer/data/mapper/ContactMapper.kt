@@ -15,7 +15,8 @@ fun List<ContactEntity>.toDialerItemModels(): List<DialerItemModel> {
           contactId = it.contactId,
           name = it.name,
           no = it.no,
-          color = it.color
+          color = it.color,
+          groupId = it.parent
         )
       }.toMutableList().apply {
         add(DialerItemModel.empty())
@@ -33,7 +34,8 @@ fun ContactDialogArgs.toContactDialogModel(): ContactsDialogModel {
     nm = name,
     no = no,
     color = color,
-    type = type
+    type = type,
+    groupId = groupId
   )
 }
 

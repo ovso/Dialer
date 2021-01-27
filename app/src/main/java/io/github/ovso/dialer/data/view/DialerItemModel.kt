@@ -5,7 +5,8 @@ data class DialerItemModel(
   val name: String,
   val no: String,
   val footer: Boolean = false,
-  val color: String
+  val color: String,
+  val groupId:Long,
 ) {
   companion object {
     fun empty(): DialerItemModel = DialerItemModel(
@@ -13,7 +14,8 @@ data class DialerItemModel(
       name = "",
       no = "",
       footer = true,
-      color = ""
+      color = "",
+      groupId = -1
     )
   }
 }

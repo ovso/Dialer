@@ -53,7 +53,8 @@ class DialerFragment : DataBindingFragment<FragmentDialerBinding>(R.layout.fragm
           no = it.no,
           color = it.color,
           type = ContactsDialog.Type.Update,
-          lifecycleCoroutineScope = lifecycleScope
+          lifecycleCoroutineScope = lifecycleScope,
+          groupId = it.groupId
         )
       ).apply {
         onOkClickListener = viewModel::onContactsDialogOkClick
@@ -72,7 +73,8 @@ class DialerFragment : DataBindingFragment<FragmentDialerBinding>(R.layout.fragm
           no = "",
           type = ContactsDialog.Type.Insert,
           color = "",
-          lifecycleCoroutineScope = lifecycleScope
+          lifecycleCoroutineScope = lifecycleScope,
+          groupId = it.groupId
         )
       ).apply {
         onOkClickListener = viewModel::onContactsDialogOkClick

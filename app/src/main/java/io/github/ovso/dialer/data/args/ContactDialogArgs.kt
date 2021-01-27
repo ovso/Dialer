@@ -8,5 +8,6 @@ data class ContactDialogArgs(
   val no: String,
   val color: String,
   val type: ContactsDialog.Type,
-  val lifecycleCoroutineScope: LifecycleCoroutineScope
+  val lifecycleCoroutineScope: LifecycleCoroutineScope,
+  val groupId:Long
 )
