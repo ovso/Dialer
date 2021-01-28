@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.tabs.TabLayout
@@ -105,6 +106,18 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
   }
 
   private fun addEvent() {
+    binding.navView.setNavigationItemSelectedListener {
+      binding.drawerLayout.closeDrawer(GravityCompat.START, true)
+      showHelpDialog()
+      true
+    }
+  }
+
+  private fun showHelpDialog() {
+    AlertDialog.Builder(requireContext())
+      .setTitle("도움말")
+      .setMessage("잘...")
+      .show()
   }
 
   private fun setupToolbarAndDrawer() {
