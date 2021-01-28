@@ -54,7 +54,7 @@ class DialerViewModel @ViewModelInject constructor(
   private fun onItemClick(item: DialerItemModel) {
     Logger.d("item: $item")
     when (item.footer) {
-      true -> _showAddDialog.value = item
+      true -> _showAddDialog.value = item.copy(groupId = args.groupId)
       else -> _showEditDialog.value = item
     }
   }
