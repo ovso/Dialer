@@ -12,12 +12,6 @@
     tools:layout="@layout/fragment_home" />
 
   <fragment
-    android:id="@+id/nav_gallery"
-    android:name="io.github.ovso.dialer.view.ui.gallery.GalleryFragment"
-    android:label="@string/menu_gallery"
-    tools:layout="@layout/fragment_gallery" />
-
-  <fragment
     android:id="@+id/nav_slideshow"
     android:name="io.github.ovso.dialer.view.ui.slideshow.SlideshowFragment"
     android:label="@string/menu_slideshow"
