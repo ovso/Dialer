@@ -65,12 +65,11 @@ class ContactsDialog(
       etAddDialogNo.setText(model.no)
       etAddDialogNm.doOnTextChanged { text, _, _, _ ->
         model = model.copy(nm = text.toString())
-        Logger.d("model: $model")
       }
       etAddDialogNo.doOnTextChanged { text, _, _, _ ->
         model = model.copy(no = text.toString())
-        Logger.d("model: $model")
       }
+      Logger.d("model: $model")
     }
     AlertDialog.Builder(context).apply {
       setView(binding.root)

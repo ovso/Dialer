@@ -75,11 +75,13 @@ class DialerFragment : DataBindingFragment<FragmentDialerBinding>(R.layout.fragm
           color = "",
           lifecycleCoroutineScope = lifecycleScope,
           groupId = it.groupId
-        )
+        ).apply {
+          Logger.d("showAddDialog args: $this")
+        }
       ).apply {
         onOkClickListener = viewModel::onContactsDialogOkClick
-      }.show().also {
-        contactsDialog = it
+      }.show().also { dialog ->
+        contactsDialog = dialog
       }
     }
   }
