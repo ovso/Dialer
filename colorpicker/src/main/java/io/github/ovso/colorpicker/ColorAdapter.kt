@@ -44,7 +44,6 @@ class ColorAdapter : ListAdapter<ColorModel, ColorViewHolder>(DIFF_UTIL) {
 class ColorViewHolder private constructor(private val binding: ItemColorBinding) :
   RecyclerView.ViewHolder(binding.root) {
   fun onBindViewHolder(item: ColorModel) {
-    Log.d("onBindViewHolder", item.toString())
     binding.apply {
       ivColorItem.setImageDrawable(ColorDrawable(Color.parseColor(item.color)))
       ivItemCheck.isVisible = item.check
