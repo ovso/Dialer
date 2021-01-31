@@ -118,7 +118,12 @@ class ContactsDialog(
   }
 
   sealed class Type {
-    object Update : Type()
-    object Insert : Type()
+    object Update : Type() {
+      override fun toString(): String = this::class.java.simpleName
+    }
+
+    object Insert : Type() {
+      override fun toString(): String = this::class.java.simpleName
+    }
   }
 }

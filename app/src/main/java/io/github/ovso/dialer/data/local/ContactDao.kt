@@ -15,7 +15,7 @@ interface ContactDao {
   @Query("SELECT * FROM contacts WHERE parent = :groupId")
   fun getContacts(groupId: Long): LiveData<List<ContactEntity>>
 
-  @Insert
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
   suspend fun insertContact(entity: ContactEntity)
 
   @Update
