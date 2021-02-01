@@ -52,7 +52,7 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
 
   private fun setupTabsAndVp() {
     TabLayoutMediator(binding.tabs, binding.vpHome) { tabs, position ->
-      tabs.text = adapter.items2[position].name
+      tabs.text = adapter.items[position].name
     }.attach()
     binding.tabs.addOnTabSelectedListener(object : OnSimpleTabSelectedListener() {
       override fun onTabReselected(tab: TabLayout.Tab) {
@@ -73,13 +73,19 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
     }
 
     viewModel.groups.observe(owner) {
-      adapter.items2.clear()
-      adapter.notifyDataSetChanged()
-      adapter.items2.addAll(it)
-      adapter.notifyDataSetChanged()
+      adapter.items.clear()
+      adapter.items.addAll(it)
+      adapter.apply {
+        items.also { items ->
+          items.clear()
+          items.addAll(it)
+          notifyDataSetChanged()
+        }
+      }
     }
 
     viewModel.showGroupModifyDialog.observe(owner) {
+      Logger.d("GroupModifyDialog")
       val selectedTabPosition = binding.tabs.selectedTabPosition
       GroupModifyDialog(
         context = requireContext(),
@@ -92,6 +98,7 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
   }
 
   private fun showAddDialog(listener: ((String) -> Unit)?) {
+    Logger.d("showAddDialog")
     val binding = DialogHomeAddGroupBinding.inflate(requireActivity().layoutInflater)
     val onOkClick = DialogInterface.OnClickListener { dialog, _ ->
       dialog.dismiss()
