@@ -45,7 +45,6 @@ class DialerViewModel @ViewModelInject constructor(
     repository.getContacts(args.groupId).observeForever { entities ->
       viewModelScope.launch(Dispatchers.IO) {
         val toDialerItemModels = entities.toDialerItemModels()
-        Logger.d("dialerItemModels: $toDialerItemModels")
         _items.postValue(entities.toDialerItemModels())
       }
     }

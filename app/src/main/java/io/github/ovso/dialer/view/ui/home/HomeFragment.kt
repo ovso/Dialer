@@ -73,8 +73,6 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
     }
 
     viewModel.groups.observe(owner) {
-      adapter.items.clear()
-      adapter.items.addAll(it)
       adapter.apply {
         items.also { items ->
           items.clear()
