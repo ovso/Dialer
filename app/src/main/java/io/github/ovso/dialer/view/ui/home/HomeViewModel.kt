@@ -12,7 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HomeViewModel @ViewModelInject constructor(
-  private val repository: HomeRepository
+  private val repository: HomeRepository,
 ) : ViewModel() {
 
   private lateinit var groupsObserver: Observer<List<GroupEntity>>

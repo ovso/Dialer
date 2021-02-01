@@ -74,6 +74,7 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
 
     viewModel.groups.observe(owner) {
       adapter.items2.clear()
+      adapter.notifyDataSetChanged()
       adapter.items2.addAll(it)
       adapter.notifyDataSetChanged()
     }
