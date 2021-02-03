@@ -10,6 +10,7 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.ovso.dialer.R
@@ -17,6 +18,8 @@ import io.github.ovso.dialer.data.HomeRepository
 import io.github.ovso.dialer.data.mapper.toGroupModifyDialogModel
 import io.github.ovso.dialer.databinding.DialogHomeAddGroupBinding
 import io.github.ovso.dialer.databinding.FragmentHomeBinding
+import io.github.ovso.dialer.utils.rx.RxBus
+import io.github.ovso.dialer.utils.rx.RxBusEvent
 import io.github.ovso.dialer.view.base.DataBindingFragment
 import io.github.ovso.dialer.view.ui.home.adapter.HomePagerAdapter
 import javax.inject.Inject
@@ -50,11 +53,9 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
   }
 
   private fun setupTabsAndVp() {
-/*
     TabLayoutMediator(binding.tabs, binding.vpHome) { tabs, position ->
       tabs.text = adapter.items[position].name
     }.attach()
-*/
   }
 
   private fun setupVp() {
@@ -68,11 +69,13 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
     }
 
     viewModel.groups.observe(owner) {
-      binding.tabs.removeAllTabs()
-      it.forEach { model ->
-        binding.tabs.apply {
-          addTab(newTab().setText(model.name))
-        }
+      adapter.apply {
+        items.clear()
+        items.addAll(it)
+        notifyDataSetChanged()
+      }
+      binding.vpHome.post {
+        RxBus.publish(RxBusEvent.RefreshDialer())
       }
     }
 

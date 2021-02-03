@@ -13,6 +13,8 @@ import io.github.ovso.dialer.data.mapper.toDialerItemModels
 import io.github.ovso.dialer.data.view.ContactsDialogModel
 import io.github.ovso.dialer.data.view.DialerItemModel
 import io.github.ovso.dialer.extensions.toStringTime
+import io.github.ovso.dialer.utils.rx.RxBus
+import io.github.ovso.dialer.utils.rx.RxBusEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -38,13 +40,27 @@ class DialerViewModel @ViewModelInject constructor(
   init {
     _setupAdapter.value = ::onItemClick
     observe()
+//    rxObserve()
   }
+
+/*
+  private fun rxObserve() {
+    RxBus.listen(RxBusEvent.RefreshDialer::class.java).subscribe {
+      repository.getContacts(args.groupId).observeForever { entities ->
+        repository.getContacts(args.groupId).observeForever { entities ->
+          viewModelScope.launch(Dispatchers.IO) {
+            _items.postValue(entities.toDialerItemModels())
+          }
+        }
+      }
+    }
+  }
+*/
 
   private fun observe() {
     Logger.d("observe groupId: ${args.groupId}")
     repository.getContacts(args.groupId).observeForever { entities ->
       viewModelScope.launch(Dispatchers.IO) {
-        val toDialerItemModels = entities.toDialerItemModels()
         _items.postValue(entities.toDialerItemModels())
       }
     }
