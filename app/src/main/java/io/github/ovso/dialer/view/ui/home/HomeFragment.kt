@@ -10,7 +10,6 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.ovso.dialer.R
@@ -51,15 +50,11 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
   }
 
   private fun setupTabsAndVp() {
+/*
     TabLayoutMediator(binding.tabs, binding.vpHome) { tabs, position ->
       tabs.text = adapter.items[position].name
     }.attach()
-    binding.tabs.addOnTabSelectedListener(object : OnSimpleTabSelectedListener() {
-      override fun onTabReselected(tab: TabLayout.Tab) {
-        super.onTabReselected(tab)
-        viewModel.onTabReselected(tab.position)
-      }
-    })
+*/
   }
 
   private fun setupVp() {
@@ -73,10 +68,11 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
     }
 
     viewModel.groups.observe(owner) {
-      adapter.apply {
-        items.clear()
-        items.addAll(it)
-        notifyDataSetChanged()
+      binding.tabs.removeAllTabs()
+      it.forEach { model ->
+        binding.tabs.apply {
+          addTab(newTab().setText(model.name))
+        }
       }
     }
 
@@ -115,6 +111,13 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
       showHelpDialog()
       true
     }
+
+    binding.tabs.addOnTabSelectedListener(object : OnSimpleTabSelectedListener() {
+      override fun onTabReselected(tab: TabLayout.Tab) {
+        super.onTabReselected(tab)
+        viewModel.onTabReselected(tab.position)
+      }
+    })
   }
 
   private fun showHelpDialog() {
