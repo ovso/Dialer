@@ -40,22 +40,7 @@ class DialerViewModel @ViewModelInject constructor(
   init {
     _setupAdapter.value = ::onItemClick
     observe()
-//    rxObserve()
   }
-
-/*
-  private fun rxObserve() {
-    RxBus.listen(RxBusEvent.RefreshDialer::class.java).subscribe {
-      repository.getContacts(args.groupId).observeForever { entities ->
-        repository.getContacts(args.groupId).observeForever { entities ->
-          viewModelScope.launch(Dispatchers.IO) {
-            _items.postValue(entities.toDialerItemModels())
-          }
-        }
-      }
-    }
-  }
-*/
 
   private fun observe() {
     Logger.d("observe groupId: ${args.groupId}")
