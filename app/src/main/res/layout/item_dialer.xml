@@ -9,6 +9,9 @@
     android:id="@+id/cv_dialer_item"
     android:layout_width="0dp"
     android:layout_height="0dp"
+    app:cardElevation="0dp"
+    android:elevation="0dp"
+    android:layout_margin="1dp"
     app:cardCornerRadius="200dp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintDimensionRatio="v,1:1"
@@ -27,6 +30,8 @@
       android:id="@+id/tv_dialer_item_name"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:textSize="20sp"
+      android:textStyle="bold"
       android:gravity="center" />
 
   </androidx.cardview.widget.CardView>
