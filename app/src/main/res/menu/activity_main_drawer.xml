@@ -6,8 +6,8 @@
     <group android:checkableBehavior="none">
         <item
             android:id="@+id/nav_help"
-            android:icon="@drawable/ic_help"
-            android:title="@string/menu_help" />
+            android:icon="@drawable/ic_right_arrow"
+            android:title="@string/menu_guide" />
 <!--
         <item
             android:id="@+id/nav_gallery"
