@@ -5,16 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import io.github.ovso.dialer.R
 import io.github.ovso.dialer.databinding.FragmentGuideBinding
 
 class GuideFragment private constructor() : BottomSheetDialogFragment() {
 
   private lateinit var binding: FragmentGuideBinding
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-  }
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,

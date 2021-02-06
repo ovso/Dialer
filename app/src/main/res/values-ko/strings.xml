@@ -21,4 +21,9 @@
   <string name="go_to_settings">설정으로 이동</string>
   <string name="end">종료</string>
   <string name="all_delete_contact">연락처 삭제</string>
+  <string name="guide_desc4">롱탭, 전화를 걸 수 있어요.</string>
+  <string name="guide_sample_name">Peter</string>
+  <string name="guide_desc3">탭, 연락처를 수정할 수 있어요.</string>
+  <string name="guide_desc2">연락처를 추가할 수 있어요.</string>
+  <string name="guide_desc1">그룹을 추가할 수 있어요.</string>
 </resources>

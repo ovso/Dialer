@@ -1,15 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  android:divider="@color/gray_400"
+  android:gravity="center_horizontal"
+  android:orientation="vertical"
+  android:showDividers="middle"
   tools:context=".view.ui.help.GuideFragment">
 
-  <TextView
+  <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:textSize="50sp"
-    android:text="@string/hello_blank_fragment" />
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:orientation="horizontal">
 
-</FrameLayout>
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/home_add_btn"
+      app:icon="@drawable/ic_add" />
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginStart="10dp"
+      android:gravity="center_vertical"
+      android:text="@string/guide_desc1"
+      android:textSize="16sp" />
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:orientation="horizontal">
+
+    <include
+      layout="@layout/item_dialer_footer"
+      android:layout_width="100dp"
+      android:layout_height="100dp" />
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginStart="10dp"
+      android:gravity="center_vertical"
+      android:text="@string/guide_desc2"
+      android:textSize="16sp" />
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:orientation="horizontal">
+
+    <androidx.cardview.widget.CardView
+      android:layout_width="100dp"
+      android:layout_height="100dp"
+      android:layout_margin="1dp"
+      android:clickable="true"
+      android:elevation="0dp"
+      android:focusable="true"
+      android:foreground="?attr/selectableItemBackground"
+      app:cardCornerRadius="200dp"
+      app:cardElevation="0dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintDimensionRatio="v,1:1"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+
+      <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@color/gray_400"
+        tools:ignore="ContentDescription" />
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/guide_sample_name"
+        android:textColor="@android:color/black"
+        android:textSize="22sp" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginStart="10dp"
+      android:gravity="center_vertical"
+      android:text="@string/guide_desc3"
+      android:textSize="16sp" />
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:orientation="horizontal">
+
+    <androidx.cardview.widget.CardView
+      android:layout_width="100dp"
+      android:layout_height="100dp"
+      android:layout_margin="1dp"
+      android:clickable="true"
+      android:elevation="0dp"
+      android:focusable="true"
+      android:foreground="?attr/selectableItemBackground"
+      app:cardCornerRadius="200dp"
+      app:cardElevation="0dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintDimensionRatio="v,1:1"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+
+      <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@color/gray_400"
+        tools:ignore="ContentDescription" />
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/guide_sample_name"
+        android:textColor="@android:color/black"
+        android:textSize="22sp" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginStart="10dp"
+      android:gravity="center_vertical"
+      android:text="@string/guide_desc4"
+      android:textSize="16sp" />
+  </LinearLayout>
+
+</LinearLayout>

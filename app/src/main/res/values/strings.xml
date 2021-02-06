@@ -21,10 +21,9 @@
   <string name="go_to_settings">Go Settings</string>
   <string name="end">Exit</string>
   <string name="all_delete_contact">Delete contacts</string>
-  <string name="hello_blank_fragment">
-    Hello blank fragment\n
-    Hello blank fragment\n
-    Hello blank fragment\n
-    Hello blank fragment
-  </string>
+  <string name="guide_desc4">Long tap, you can make a phone call.</string>
+  <string name="guide_sample_name">Peter</string>
+  <string name="guide_desc3">Tap to edit your contacts.</string>
+  <string name="guide_desc2">You can add contacts.</string>
+  <string name="guide_desc1">You can add groups.</string>
 </resources>
