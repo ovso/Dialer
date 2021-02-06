@@ -48,7 +48,7 @@ class HomeViewModel @ViewModelInject constructor(
         repository.insertGroup(
           GroupEntity(
             groupId = groupId,
-            name = text
+            name = if (text.isEmpty()) "?" else text
           )
         )
       }
