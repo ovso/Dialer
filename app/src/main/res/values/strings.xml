@@ -21,4 +21,10 @@
   <string name="go_to_settings">Go Settings</string>
   <string name="end">Exit</string>
   <string name="all_delete_contact">Delete contacts</string>
+  <string name="hello_blank_fragment">
+    Hello blank fragment\n
+    Hello blank fragment\n
+    Hello blank fragment\n
+    Hello blank fragment
+  </string>
 </resources>

@@ -11,6 +11,7 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="bottomSheetDialogTheme">@style/DialerBottomSheetDialog</item>
         <!-- Customize your theme here. -->
     </style>
 
@@ -26,5 +27,23 @@
   <style name="AppTheme.Launcher" parent="Theme.Dialer.NoActionBar">
     <item name="android:windowBackground">@drawable/splash_bg</item>
   </style>
+
+  <style name="DialerBottomSheetDialog" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
+    <item name="bottomSheetStyle">@style/DialerBottomSheet</item>
+    <!--<item name="android:background">@color/white</item>--> <!--사용가능-->
+  </style>
+
+  <style name="DialerBottomSheet" parent="Widget.MaterialComponents.BottomSheet">
+    <item name="shapeAppearanceOverlay">@style/DialerShapeAppearanceBottomSheetDialog</item>
+  </style>
+
+  <style name="DialerShapeAppearanceBottomSheetDialog" parent="">
+    <item name="cornerFamily">rounded</item>
+    <item name="cornerSizeTopRight">16dp</item>
+    <item name="cornerSizeTopLeft">16dp</item>
+    <item name="cornerSizeBottomRight">0dp</item>
+    <item name="cornerSizeBottomLeft">0dp</item>
+  </style>
+
 
 </resources>

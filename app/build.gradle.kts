@@ -98,6 +98,7 @@ dependencies {
 
   // dagger hilt
   implementation("com.google.dagger:hilt-android:${Versions.hilt_android}")
+  implementation("androidx.legacy:legacy-support-v4:1.0.0")
   kapt("com.google.dagger:hilt-android-compiler:${Versions.hilt_android}")
 
   // hilt
