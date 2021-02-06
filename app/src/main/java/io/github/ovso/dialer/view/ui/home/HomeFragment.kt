@@ -18,8 +18,6 @@ import io.github.ovso.dialer.data.HomeRepository
 import io.github.ovso.dialer.data.mapper.toGroupModifyDialogModel
 import io.github.ovso.dialer.databinding.DialogHomeAddGroupBinding
 import io.github.ovso.dialer.databinding.FragmentHomeBinding
-import io.github.ovso.dialer.utils.rx.RxBus
-import io.github.ovso.dialer.utils.rx.RxBusEvent
 import io.github.ovso.dialer.view.base.DataBindingFragment
 import io.github.ovso.dialer.view.ui.home.adapter.HomePagerAdapter
 import javax.inject.Inject
@@ -33,10 +31,6 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
   @Inject
   lateinit var repository: HomeRepository
 
-  private val adapter by lazy {
-    HomePagerAdapter(this)
-  }
-
   override fun onStart() {
     super.onStart()
     setHasOptionsMenu(true)
@@ -48,18 +42,23 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
     addEvent()
     observe()
     setupVp()
-    setupTabsAndVp()
+    setupTabMediator()
     Logger.d("Logger: $repository")
   }
 
-  private fun setupTabsAndVp() {
-    TabLayoutMediator(binding.tabs, binding.vpHome) { tabs, position ->
-      tabs.text = adapter.items[position].name
-    }.attach()
+  private fun setupTabMediator() {
+    (binding.vpHome.adapter as? HomePagerAdapter)?.let { adapter ->
+      TabLayoutMediator(binding.tabs, binding.vpHome) { tabs, position ->
+        tabs.text = adapter.items[position].name
+      }.attach()
+    }
   }
 
   private fun setupVp() {
-    binding.vpHome.adapter = adapter
+    HomePagerAdapter(this).also {
+      binding.vpHome.adapter = null
+      binding.vpHome.adapter = it
+    }
   }
 
   private fun observe() {
@@ -68,14 +67,12 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
       showAddDialog(it)
     }
 
-    viewModel.groups.observe(owner) {
-      adapter.apply {
-        items.clear()
-        items.addAll(it)
-        notifyDataSetChanged()
-      }
-      binding.vpHome.post {
-        RxBus.publish(RxBusEvent.RefreshDialer())
+    viewModel.groups.observe(owner) { groupModels ->
+      setupVp()
+      setupTabMediator()
+      (binding.vpHome.adapter as? HomePagerAdapter)?.let {
+        it.items.addAll(groupModels)
+        it.notifyDataSetChanged()
       }
     }
 

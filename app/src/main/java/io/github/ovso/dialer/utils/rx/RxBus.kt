@@ -17,5 +17,4 @@ object RxBus {
 }
 
 object RxBusEvent {
-  class RefreshDialer
 }
