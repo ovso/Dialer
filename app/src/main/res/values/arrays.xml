@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string-array name="picker_colors">
-    <item>#F44336</item>
-    <item>#E91E63</item>
-    <item>#673AB7</item>
-    <item>#3F51B5</item>
-    <item>#4CAF50</item>
-    <item>#FF9800</item>
-    <item>#FFEB3B</item>
-    <item>#9E9E9E</item>
-    <item>#607D8B</item>
-    <item>#FFC107</item>
+    <item>#D32F2F</item>
+    <item>#C2185B</item>
+    <item>#7B1FA2</item>
+    <item>#303F9F</item>
+    <item>#0097A7</item>
+    <item>#AFB42B</item>
+    <item>#FBC02D</item>
+    <item>#5D4037</item>
+    <item>#689F38</item>
+    <item>#455A64</item>
+
+    <item>#FFCDD2</item>
+    <item>#F48FB1</item>
+    <item>#CE93D8</item>
+    <item>#9FA8DA</item>
+    <item>#80DEEA</item>
+    <item>#E6EE9C</item>
+    <item>#FFF59D</item>
+    <item>#BCAAA4</item>
+    <item>#C5E1A5</item>
+    <item>#B0BEC5</item>
   </string-array>
 </resources>
