@@ -20,7 +20,6 @@ import io.github.ovso.dialer.databinding.DialogHomeAddGroupBinding
 import io.github.ovso.dialer.databinding.FragmentHomeBinding
 import io.github.ovso.dialer.view.base.DataBindingFragment
 import io.github.ovso.dialer.view.ui.home.adapter.HomePagerAdapter
-import kotlinx.coroutines.Job
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -42,9 +41,6 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
     setupToolbarAndDrawer()
     addEvent()
     observe()
-    setupVp()
-    setupTabMediator()
-    Logger.d("Logger: $repository")
   }
 
   private fun setupTabMediator() {
@@ -123,7 +119,7 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
 
   private fun showHelpDialog() {
     AlertDialog.Builder(requireContext())
-      .setTitle("도움말")
+      .setTitle(R.string.menu_help)
       .setMessage("잘...")
       .show()
   }
