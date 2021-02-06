@@ -32,11 +32,9 @@ class SplashActivity : AppCompatActivity() {
   }
 
   private fun showNotGrantedDialog() {
-    val appName = getString(R.string.app_name)
-    val msg = getString(R.string.permission_not_granted_msg, appName)
     AlertDialog.Builder(this)
       .setIcon(R.drawable.ic_warning)
-      .setMessage(msg)
+      .setMessage(R.string.permission_not_granted_msg)
       .setCancelable(false)
       .setPositiveButton(R.string.end) { dialog, _ ->
         dialog.dismiss()
