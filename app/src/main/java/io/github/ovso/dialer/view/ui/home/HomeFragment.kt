@@ -20,6 +20,7 @@ import io.github.ovso.dialer.databinding.DialogHomeAddGroupBinding
 import io.github.ovso.dialer.databinding.FragmentHomeBinding
 import io.github.ovso.dialer.view.base.DataBindingFragment
 import io.github.ovso.dialer.view.ui.home.adapter.HomePagerAdapter
+import kotlinx.coroutines.Job
 import javax.inject.Inject
 
 @AndroidEntryPoint

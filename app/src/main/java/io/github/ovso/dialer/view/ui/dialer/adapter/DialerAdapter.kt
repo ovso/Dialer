@@ -4,6 +4,8 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.activity.ComponentActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +13,9 @@ import io.github.ovso.dialer.data.view.DialerItemModel
 import io.github.ovso.dialer.databinding.ItemDialerBinding
 import io.github.ovso.dialer.databinding.ItemDialerFooterBinding
 import io.github.ovso.dialer.extensions.makeCall
+import io.github.ovso.dialer.extensions.setOnThrottleClickListener
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class DialerAdapter : ListAdapter<DialerItemModel, RecyclerView.ViewHolder>(diffCallback) {
 
@@ -60,8 +65,8 @@ class DialerViewHolder private constructor(
     binding.apply {
       tvDialerItemName.text = item.name
       ivDialerItemColor.setImageDrawable(ColorDrawable(Color.parseColor(item.color)))
-      root.apply {
-        setOnClickListener {
+      cvDialerItem.apply {
+        setOnThrottleClickListener {
           clickListener?.invoke(item)
         }
         setOnLongClickListener {
@@ -88,7 +93,7 @@ class DialerFooterViewHolder private constructor(
   var clickListener: ((DialerItemModel) -> Unit)? = null
 
   override fun onBindViewHolder(item: DialerItemModel) {
-    binding.root.setOnClickListener {
+    binding.cvDialerItemFooter.setOnThrottleClickListener {
       clickListener?.invoke(item)
     }
   }

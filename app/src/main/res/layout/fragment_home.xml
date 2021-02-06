@@ -57,7 +57,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:text="@string/home_add_btn"
-        android:onClick="@{() -> viewModel.onFabClick()}"
+        onThrottleClick="@{() -> viewModel.onFabClick()}"
         app:icon="@drawable/ic_add" />
 
 

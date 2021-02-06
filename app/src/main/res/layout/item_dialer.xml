@@ -13,6 +13,7 @@
     android:elevation="0dp"
     android:layout_margin="1dp"
     app:cardCornerRadius="200dp"
+    android:foreground="?attr/selectableItemBackground"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintDimensionRatio="v,1:1"
     app:layout_constraintEnd_toEndOf="parent"
@@ -30,8 +31,8 @@
       android:id="@+id/tv_dialer_item_name"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:textSize="20sp"
-      android:textStyle="bold"
+      android:textSize="22sp"
+      android:textColor="@android:color/black"
       android:gravity="center" />
 
   </androidx.cardview.widget.CardView>
