@@ -36,7 +36,10 @@
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
+          app:tabIndicatorColor="@color/black"
+          app:tabIndicatorFullWidth="false"
           app:tabMode="scrollable"
+          app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
           app:tabTextColor="@android:color/black" />
 
         <androidx.viewpager2.widget.ViewPager2
@@ -52,12 +55,12 @@
 
       <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fab_home"
+        onThrottleClick="@{() -> viewModel.onFabClick()}"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:text="@string/home_add_btn"
-        onThrottleClick="@{() -> viewModel.onFabClick()}"
         app:icon="@drawable/ic_add" />
 
 

@@ -9,8 +9,8 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="?attr/colorPrimary"
-    app:navigationIcon="@drawable/ic_blur"
+    android:background="@android:color/white"
+    android:theme="@style/Theme.Toolbar"
     app:popupTheme="@style/Theme.Dialer.PopupOverlay" />
 
 </com.google.android.material.appbar.AppBarLayout>
