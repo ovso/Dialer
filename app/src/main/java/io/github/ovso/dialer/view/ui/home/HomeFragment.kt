@@ -18,6 +18,7 @@ import io.github.ovso.dialer.data.HomeRepository
 import io.github.ovso.dialer.data.mapper.toGroupModifyDialogModel
 import io.github.ovso.dialer.databinding.DialogHomeAddGroupBinding
 import io.github.ovso.dialer.databinding.FragmentHomeBinding
+import io.github.ovso.dialer.extensions.loadAdaptiveBanner
 import io.github.ovso.dialer.view.base.DataBindingFragment
 import io.github.ovso.dialer.view.ui.help.GuideFragment
 import io.github.ovso.dialer.view.ui.home.adapter.HomePagerAdapter
@@ -42,6 +43,11 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
     setupToolbarAndDrawer()
     addEvent()
     observe()
+    setupAd()
+  }
+
+  private fun setupAd() {
+    binding.adContainer.loadAdaptiveBanner()
   }
 
   private fun setupTabMediator() {

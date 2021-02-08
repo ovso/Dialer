@@ -10,75 +10,86 @@
       type="io.github.ovso.dialer.view.ui.home.HomeViewModel" />
   </data>
 
-  <androidx.drawerlayout.widget.DrawerLayout
-    android:id="@+id/drawer_layout"
+  <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:openDrawer="start">
+    android:orientation="vertical">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.drawerlayout.widget.DrawerLayout
+      android:id="@+id/drawer_layout"
       android:layout_width="match_parent"
-      android:layout_height="match_parent">
+      android:layout_height="match_parent"
+      tools:openDrawer="start">
 
-      <include
-        android:id="@+id/includeToolbar"
-        layout="@layout/layout_toolbar" />
-
-      <androidx.constraintlayout.widget.ConstraintLayout
+      <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.tabs.TabLayout
-          android:id="@+id/tabs"
+        <include
+          android:id="@+id/includeToolbar"
+          layout="@layout/layout_toolbar" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+          <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabIndicatorColor="@color/black"
+            app:tabIndicatorFullWidth="false"
+            app:tabMode="scrollable"
+            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+            app:tabTextColor="@android:color/black" />
+
+          <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_home"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tabs" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+          android:id="@+id/fab_home"
+          onThrottleClick="@{() -> viewModel.onFabClick()}"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="bottom|end"
+          android:layout_margin="16dp"
+          android:text="@string/home_add_btn"
+          app:icon="@drawable/ic_add" />
+
+
+        <io.github.ovso.colorpicker.EasyColorPicker
+          android:id="@+id/picker_home"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent"
-          app:tabIndicatorColor="@color/black"
-          app:tabIndicatorFullWidth="false"
-          app:tabMode="scrollable"
-          app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
-          app:tabTextColor="@android:color/black" />
+          android:layout_gravity="center"
+          android:visibility="visible" />
+      </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-        <androidx.viewpager2.widget.ViewPager2
-          android:id="@+id/vp_home"
-          android:layout_width="0dp"
-          android:layout_height="0dp"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@id/tabs" />
-
-      </androidx.constraintlayout.widget.ConstraintLayout>
-
-      <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/fab_home"
-        onThrottleClick="@{() -> viewModel.onFabClick()}"
+      <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:text="@string/home_add_btn"
-        app:icon="@drawable/ic_add" />
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer" />
 
+    </androidx.drawerlayout.widget.DrawerLayout>
 
-      <io.github.ovso.colorpicker.EasyColorPicker
-        android:id="@+id/picker_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="visible" />
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-    <com.google.android.material.navigation.NavigationView
-      android:id="@+id/nav_view"
-      android:layout_width="wrap_content"
-      android:layout_height="match_parent"
-      android:layout_gravity="start"
-      app:headerLayout="@layout/nav_header_main"
-      app:menu="@menu/activity_main_drawer" />
-
-  </androidx.drawerlayout.widget.DrawerLayout>
+    <FrameLayout
+      android:id="@+id/ad_container"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" />
+  </LinearLayout>
 </layout>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="ad_app_id"></string>
-  <string name="ad_banner_unit_id"></string>
-  <string name="ad_interstitial_unit_id"></string>
+  <string name="ad_app_id">ca-app-pub-8679189423397017~4395013140</string>
+  <string name="ad_banner_unit_id">ca-app-pub-8679189423397017/4306726699</string>
+  <string name="ad_interstitial_unit_id">ca-app-pub-8679189423397017/5671052904</string>
+  <string name="ad_native_unit_id">ca-app-pub-8679189423397017/6600991193</string>
 </resources>
