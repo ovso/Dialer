@@ -45,7 +45,7 @@
         android:name="io.github.ovso.dialer.app.TimberInitializer"
         android:value="androidx.startup" />
       <meta-data
-        android:name="io.github.ovso.dialer.app.LoggerInitializer"
+        android:name="io.github.ovso.dialer.app.AdmobInitializer"
         android:value="androidx.startup" />
     </provider>
   </application>
