@@ -13,6 +13,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
+import io.github.ovso.dialer.DEBUG
 import io.github.ovso.dialer.R
 import io.github.ovso.dialer.data.HomeRepository
 import io.github.ovso.dialer.data.mapper.toGroupModifyDialogModel
@@ -47,7 +48,10 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
   }
 
   private fun setupAd() {
-    binding.adContainer.loadAdaptiveBanner()
+    when (DEBUG) {
+      true -> Logger.d("Do not load ad.")
+      else -> binding.adContainer.loadAdaptiveBanner()
+    }
   }
 
   private fun setupTabMediator() {
