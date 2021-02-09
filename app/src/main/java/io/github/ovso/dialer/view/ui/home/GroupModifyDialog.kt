@@ -19,7 +19,8 @@ class GroupModifyDialog(
   private val tabText: String,
   private val lifecycleCoroutineScope: LifecycleCoroutineScope,
   private val repository: HomeRepository,
-  private val model: GroupModifyDialogModel
+  private val model: GroupModifyDialogModel,
+  private val onDelClickListener: (() -> Unit)? = null
 ) {
 
   fun show() {
@@ -39,6 +40,7 @@ class GroupModifyDialog(
       setNegativeButton(android.R.string.cancel, null)
       setNeutralButton(R.string.all_tab_del) { dialog, _ ->
         dialog.dismiss()
+        onDelClickListener?.invoke()
         lifecycleCoroutineScope.launch(Dispatchers.Default) {
           repository.deleteGroup(
             entity = model.toGroupEntity()

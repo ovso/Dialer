@@ -20,6 +20,7 @@ import io.github.ovso.dialer.data.mapper.toGroupModifyDialogModel
 import io.github.ovso.dialer.databinding.DialogHomeAddGroupBinding
 import io.github.ovso.dialer.databinding.FragmentHomeBinding
 import io.github.ovso.dialer.extensions.loadAdaptiveBanner
+import io.github.ovso.dialer.extensions.showInterstitialAd
 import io.github.ovso.dialer.view.base.DataBindingFragment
 import io.github.ovso.dialer.view.ui.help.GuideFragment
 import io.github.ovso.dialer.view.ui.home.adapter.HomePagerAdapter
@@ -45,6 +46,8 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
     addEvent()
     observe()
     setupAd()
+
+//    showInterstitialAd()
   }
 
   private fun setupAd() {
@@ -92,7 +95,10 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
         tabText = binding.tabs.getTabAt(selectedTabPosition)?.text.toString(),
         lifecycleCoroutineScope = lifecycleScope,
         repository = repository,
-        model = it.toGroupModifyDialogModel()
+        model = it.toGroupModifyDialogModel(),
+        onDelClickListener = {
+          showInterstitialAd()
+        }
       ).show()
     }
   }
@@ -103,6 +109,7 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
     val onOkClick = DialogInterface.OnClickListener { dialog, _ ->
       dialog.dismiss()
       listener?.invoke(binding.etGroupAddDialog.text?.trim().toString())
+      showInterstitialAd()
     }
     AlertDialog.Builder(requireContext()).apply {
       setView(binding.root)
