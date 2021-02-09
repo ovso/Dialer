@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.util.DisplayMetrics
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
@@ -37,7 +36,7 @@ fun ViewGroup.loadAdaptiveBanner() {
   }
 
   val adView = AdView(context)
-  this.addView(adView)
+  addView(adView)
 
   fun load() {
     adView.adUnitId = context.getString(R.string.ad_banner_unit_id)
