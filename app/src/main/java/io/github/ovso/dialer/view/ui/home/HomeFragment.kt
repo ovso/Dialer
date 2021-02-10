@@ -142,7 +142,7 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
   private fun setupToolbarAndDrawer() {
     (requireActivity() as? AppCompatActivity)?.let {
       it.setSupportActionBar(binding.includeToolbar.toolbar)
-      it.title = "Speed Dialer"
+      it.title = getString(R.string.app_name)
     }
     actionBarDrawerToggle = ActionBarDrawerToggle(
       activity,
