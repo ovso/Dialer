@@ -27,19 +27,16 @@ fun Activity.adaptiveBannerAdSize(): AdSize {
 
 
 fun ViewGroup.loadAdaptiveBanner() {
-
-  fun activityContext(): Context {
-    return if (context is ViewComponentManager.FragmentContextWrapper) {
-      return (context as ViewComponentManager.FragmentContextWrapper).baseContext
-    } else context
-  }
+  val actContext: Context = if (context is ViewComponentManager.FragmentContextWrapper) {
+    (context as ViewComponentManager.FragmentContextWrapper).baseContext
+  } else context
 
   val adView = AdView(context)
   addView(adView)
 
   fun load() {
     adView.adUnitId = context.getString(R.string.ad_banner_unit_id)
-    adView.adSize = (activityContext() as Activity).adaptiveBannerAdSize()
+    adView.adSize = (actContext as Activity).adaptiveBannerAdSize()
     val adRequest = AdRequest.Builder().build()
     adView.loadAd(adRequest)
   }
