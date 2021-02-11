@@ -4,6 +4,7 @@ import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.orhanobut.logger.Logger
+import io.github.ovso.dialer.data.DialerRepository
 import io.github.ovso.dialer.data.HomeRepository
 import io.github.ovso.dialer.data.args.ARGS
 import io.github.ovso.dialer.data.args.DialerArgs
@@ -19,7 +20,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class DialerViewModel @ViewModelInject constructor(
-  private val repository: HomeRepository,
+  private val repository: DialerRepository,
   @Assisted private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 

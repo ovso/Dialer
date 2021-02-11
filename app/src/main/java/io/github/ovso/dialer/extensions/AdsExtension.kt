@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.gms.ads.*
 import dagger.hilt.android.internal.managers.ViewComponentManager
+import io.github.ovso.dialer.DEBUG
 import io.github.ovso.dialer.R
 
 fun Activity.adaptiveBannerAdSize(): AdSize {
@@ -32,7 +33,7 @@ fun ViewGroup.loadAdaptiveBanner() {
   } else context
 
   val adView = AdView(context)
-  addView(adView)
+  if (DEBUG.not()) addView(adView)
 
   fun load() {
     adView.adUnitId = context.getString(R.string.ad_banner_unit_id)
@@ -52,7 +53,7 @@ fun Fragment.showInterstitialAd(
   interstitialAd.adListener = object : AdListener() {
     override fun onAdLoaded() {
       super.onAdLoaded()
-      interstitialAd.show()
+      if (DEBUG.not()) interstitialAd.show()
     }
 
     override fun onAdClosed() {

@@ -45,16 +45,7 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
     setupToolbarAndDrawer()
     addEvent()
     observe()
-    setupAd()
-
-//    showInterstitialAd()
-  }
-
-  private fun setupAd() {
-    when (DEBUG) {
-      true -> Logger.d("Do not load ad.")
-      else -> binding.adContainer.loadAdaptiveBanner()
-    }
+    binding.adContainer.loadAdaptiveBanner()
   }
 
   private fun setupTabMediator() {
