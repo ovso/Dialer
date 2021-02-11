@@ -1,16 +1,15 @@
 package io.github.ovso.dialer.data.prefs
 
-import android.content.Context
+import android.app.Activity
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.createDataStore
-import dagger.hilt.android.qualifiers.ActivityContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class ConfigDataStore @Inject constructor(@ActivityContext context: Context) {
-  private val dataStore = context.createDataStore(name = "config_prefs")
+class ConfigDataStore @Inject constructor(act: Activity) {
+  private val dataStore = act.createDataStore(name = "config_prefs")
 
   suspend fun storeConfig(firstRun: Boolean) {
     dataStore.edit {

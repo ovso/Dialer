@@ -8,15 +8,16 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
-import io.github.ovso.dialer.DEBUG
 import io.github.ovso.dialer.R
 import io.github.ovso.dialer.data.HomeRepository
 import io.github.ovso.dialer.data.mapper.toGroupModifyDialogModel
+import io.github.ovso.dialer.data.prefs.ConfigDataStore
 import io.github.ovso.dialer.databinding.DialogHomeAddGroupBinding
 import io.github.ovso.dialer.databinding.FragmentHomeBinding
 import io.github.ovso.dialer.extensions.loadAdaptiveBanner
@@ -24,16 +25,31 @@ import io.github.ovso.dialer.extensions.showInterstitialAd
 import io.github.ovso.dialer.view.base.DataBindingFragment
 import io.github.ovso.dialer.view.ui.help.GuideFragment
 import io.github.ovso.dialer.view.ui.home.adapter.HomePagerAdapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 @AndroidEntryPoint
-class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
+class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_home),
+  CoroutineScope {
+
+  private val job = Job()
+  override val coroutineContext: CoroutineContext
+    get() = job + Dispatchers.Main
+
   override val viewModel: HomeViewModel by viewModels()
 
   private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
 
   @Inject
   lateinit var repository: HomeRepository
+
+  @Inject
+  lateinit var configDataStore: ConfigDataStore
 
   override fun onStart() {
     super.onStart()
@@ -46,6 +62,19 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
     addEvent()
     observe()
     binding.adContainer.loadAdaptiveBanner()
+    launch {
+      configDataStore.firstRunFlow.collect {
+        when (it) {
+          true -> {
+            configDataStore.storeConfig(firstRun = false) // 기본값이 true
+            GuideFragment.newInstance()
+              .show(childFragmentManager, GuideFragment::class.java.simpleName)
+          }
+          else -> Logger.d("Not first run")
+        }
+
+      }
+    }
   }
 
   private fun setupTabMediator() {
@@ -91,6 +120,10 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
           showInterstitialAd()
         }
       ).show()
+    }
+
+    configDataStore.firstRunFlow.asLiveData().observe(owner) {
+
     }
   }
 
@@ -146,5 +179,6 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
       binding.drawerLayout.addDrawerListener(it)
     }
   }
+
 
 }
