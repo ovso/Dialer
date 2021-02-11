@@ -3,6 +3,7 @@ package io.github.ovso.dialer.view.ui.home
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
+import androidx.activity.addCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -157,6 +158,17 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
         viewModel.onTabReselected(tab.position)
       }
     })
+
+    requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, true) {
+      Logger.d("back key")
+      AlertDialog.Builder(requireContext()).apply {
+        setMessage("종료하시겠습니까?")
+        setNegativeButton(android.R.string.ok) { _, _ ->
+          requireActivity().finishAffinity()
+        }
+        show()
+      }
+    }
   }
 
   private fun showHelpDialog() {
