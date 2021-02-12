@@ -1,6 +1,7 @@
 package io.github.ovso.dialer.view.ui.home
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.addCallback
@@ -9,8 +10,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
+import com.google.android.gms.oss.licenses.OssLicensesActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.orhanobut.logger.Logger
@@ -70,8 +71,7 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
         when (it) {
           true -> {
             configDataStore.storeConfig(firstRun = false) // 기본값이 true
-            GuideFragment.newInstance()
-              .show(childFragmentManager, GuideFragment::class.java.simpleName)
+            showGuide()
           }
           else -> Logger.d("Not first run")
         }
@@ -124,10 +124,6 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
         }
       ).show()
     }
-
-    configDataStore.firstRunFlow.asLiveData().observe(owner) {
-
-    }
   }
 
   private fun showAddDialog(listener: ((String) -> Unit)?) {
@@ -150,7 +146,10 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
   private fun addEvent() {
     binding.navView.setNavigationItemSelectedListener {
       binding.drawerLayout.closeDrawer(GravityCompat.START, true)
-      showHelpDialog()
+      when (it.itemId) {
+        R.id.nav_guide -> showGuide()
+        else -> navigateToOpenLicense()
+      }
       true
     }
 
@@ -163,6 +162,12 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
 
     requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, true) {
       showNativeAdsDialog()
+    }
+  }
+
+  private fun navigateToOpenLicense() {
+    Intent(requireContext(), OssLicensesActivity::class.java).apply {
+      startActivity(this)
     }
   }
 
@@ -186,7 +191,7 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
       .show()
   }
 
-  private fun showHelpDialog() {
+  private fun showGuide() {
     GuideFragment.newInstance().show(childFragmentManager, GuideFragment::class.java.simpleName)
   }
 

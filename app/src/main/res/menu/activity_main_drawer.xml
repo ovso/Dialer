@@ -5,9 +5,14 @@
 
     <group android:checkableBehavior="none">
         <item
-            android:id="@+id/nav_help"
+            android:id="@+id/nav_guide"
             android:icon="@drawable/ic_right_arrow"
             android:title="@string/menu_guide" />
+
+        <item
+            android:id="@+id/nav_opensource_license"
+            android:icon="@drawable/ic_right_arrow"
+            android:title="@string/menu_open_licenses" />
 <!--
         <item
             android:id="@+id/nav_gallery"

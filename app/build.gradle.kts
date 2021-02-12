@@ -170,6 +170,8 @@ dependencies {
   // native ad
   implementation(project(":nativetemplates"))
 
+  implementation("com.google.android.gms:play-services-oss-licenses:17.0.0")
+
   testImplementation("junit:junit:4.13.1")
   androidTestImplementation("androidx.test.ext:junit:1.1.2")
   androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
