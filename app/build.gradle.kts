@@ -28,7 +28,7 @@ android {
     targetSdkVersion(DefaultConfig.targetSdk)
     versionCode = DefaultConfig.versionCode
     versionName = DefaultConfig.versionName
-
+    setProperty("archivesBaseName", "Dialer-$versionName-$versionCode")
     testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
   }
 
