@@ -12,6 +12,7 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.oss.licenses.OssLicensesActivity
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.orhanobut.logger.Logger
@@ -166,7 +167,7 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
   }
 
   private fun navigateToOpenLicense() {
-    Intent(requireContext(), OssLicensesActivity::class.java).apply {
+    Intent(requireContext(), OssLicensesMenuActivity::class.java).apply {
       startActivity(this)
     }
   }
