@@ -47,6 +47,9 @@
       <meta-data
         android:name="io.github.ovso.dialer.app.AdmobInitializer"
         android:value="androidx.startup" />
+      <meta-data
+        android:name="io.github.ovso.dialer.app.DatabaseInitializer"
+        android:value="androidx.startup" />
     </provider>
   </application>
 

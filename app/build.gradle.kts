@@ -1,4 +1,6 @@
 @file:Suppress("SpellCheckingInspection")
+import org.jetbrains.kotlin.konan.properties.Properties
+import java.io.FileInputStream
 
 plugins {
   id("com.android.application")
@@ -13,6 +15,10 @@ plugins {
   id("androidx.navigation.safeargs.kotlin")
 }
 
+val keystorePropertiesFile = rootProject.file("../jks/keystore.properties")
+val keystoreProperties = Properties()
+keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+
 android {
   compileSdkVersion(DefaultConfig.compileSdk)
 
@@ -26,11 +32,26 @@ android {
     testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
   }
 
-  buildTypes {
+  signingConfigs {
     getByName("debug") {
 
     }
+
+    create("release") {
+      keyAlias = keystoreProperties.getProperty("keyAlias")
+      keyPassword = keystoreProperties.getProperty("keyPassword")
+      storeFile = file(keystoreProperties.getProperty("storeFile"))
+      storePassword = keystoreProperties.getProperty("storePassword")
+    }
+  }
+
+  buildTypes {
+    getByName("debug") {
+      signingConfig = signingConfigs.getByName("debug")
+    }
+
     getByName("release") {
+      signingConfig = signingConfigs.getByName("release")
       isMinifyEnabled = false
       proguardFile(getDefaultProguardFile("proguard-android.txt"))
       // global proguard settings
