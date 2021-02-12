@@ -14,12 +14,12 @@ plugins {
 }
 
 android {
-  compileSdkVersion(30)
+  compileSdkVersion(DefaultConfig.compileSdk)
 
   defaultConfig {
-    applicationId = "io.github.ovso.dialer"
-    minSdkVersion(23)
-    targetSdkVersion(30)
+    applicationId = DefaultConfig.appId
+    minSdkVersion(DefaultConfig.minSdk)
+    targetSdkVersion(DefaultConfig.targetSdk)
     versionCode = 1
     versionName = "1.0"
 
@@ -82,12 +82,12 @@ dependencies {
   implementation("androidx.appcompat:appcompat:1.2.0")
   implementation("com.google.android.material:material:1.3.0")
   implementation("androidx.constraintlayout:constraintlayout:2.0.4")
-  implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
-  implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
+  implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.0")
+  implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0")
   implementation("androidx.navigation:navigation-fragment-ktx:2.3.3")
   implementation("androidx.navigation:navigation-ui-ktx:2.3.3")
-  implementation("androidx.activity:activity-ktx:1.2.0-rc01")
-  implementation("androidx.fragment:fragment-ktx:1.3.0-rc02")
+  implementation("androidx.activity:activity-ktx:1.3.0-alpha02")
+  implementation("androidx.fragment:fragment-ktx:1.3.0")
 
   // firebase
   implementation(platform("com.google.firebase:firebase-bom:26.1.1"))
@@ -143,7 +143,11 @@ dependencies {
   // tutorial
   implementation("com.github.takusemba:spotlight:2.0.3")
 
+  // datastore
   implementation("androidx.datastore:datastore-preferences:1.0.0-alpha06")
+
+  // native ad
+  implementation(project(":nativetemplates"))
 
   testImplementation("junit:junit:4.13.1")
   androidTestImplementation("androidx.test.ext:junit:1.1.2")

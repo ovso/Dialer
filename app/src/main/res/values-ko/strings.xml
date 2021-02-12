@@ -26,4 +26,6 @@
   <string name="guide_desc3">탭, 연락처를 수정할 수 있어요.</string>
   <string name="guide_desc2">연락처를 추가할 수 있어요.</string>
   <string name="guide_desc1">그룹을 추가할 수 있어요.</string>
+  <string name="quit_app">앱 종료</string>
+  <string name="leave_review">리뷰 남기기</string>
 </resources>

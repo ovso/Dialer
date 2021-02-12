@@ -22,10 +22,12 @@ import io.github.ovso.dialer.data.prefs.ConfigDataStore
 import io.github.ovso.dialer.databinding.DialogHomeAddGroupBinding
 import io.github.ovso.dialer.databinding.FragmentHomeBinding
 import io.github.ovso.dialer.extensions.loadAdaptiveBanner
+import io.github.ovso.dialer.extensions.navigateToStore
 import io.github.ovso.dialer.extensions.showInterstitialAd
 import io.github.ovso.dialer.view.base.DataBindingFragment
 import io.github.ovso.dialer.view.ui.help.GuideFragment
 import io.github.ovso.dialer.view.ui.home.adapter.HomePagerAdapter
+import io.github.ovso.dialer.view.ui.nativead.NativeAdsDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -160,15 +162,28 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
     })
 
     requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, true) {
-      Logger.d("back key")
-      AlertDialog.Builder(requireContext()).apply {
-        setMessage("종료하시겠습니까?")
-        setNegativeButton(android.R.string.ok) { _, _ ->
-          requireActivity().finishAffinity()
+      showNativeAdsDialog()
+    }
+  }
+
+  private fun showNativeAdsDialog() {
+    fun onClick(dialog: DialogInterface, which: Int) {
+      dialog.dismiss()
+      when (which) {
+        DialogInterface.BUTTON_POSITIVE -> requireActivity().finish()
+        else -> {
+          navigateToStore()
+          requireActivity().finish()
         }
-        show()
       }
     }
+
+    NativeAdsDialog(requireContext())
+      .setUnitId(getString(R.string.ad_native_unit_id))
+      .setCancelable(true)
+      .setPositiveButton(R.string.quit_app, ::onClick)
+      .setNeutralButton(R.string.leave_review, ::onClick)
+      .show()
   }
 
   private fun showHelpDialog() {

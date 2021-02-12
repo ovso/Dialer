@@ -26,4 +26,6 @@
   <string name="guide_desc3">Tap to edit your contacts.</string>
   <string name="guide_desc2">You can add contacts.</string>
   <string name="guide_desc1">You can add groups.</string>
+  <string name="quit_app">Quit</string>
+  <string name="leave_review">Review</string>
 </resources>
