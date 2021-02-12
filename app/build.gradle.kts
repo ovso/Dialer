@@ -20,8 +20,8 @@ android {
     applicationId = DefaultConfig.appId
     minSdkVersion(DefaultConfig.minSdk)
     targetSdkVersion(DefaultConfig.targetSdk)
-    versionCode = 1
-    versionName = "1.0"
+    versionCode = DefaultConfig.versionCode
+    versionName = DefaultConfig.versionName
 
     testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
   }
