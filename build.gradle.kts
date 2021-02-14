@@ -15,8 +15,6 @@ buildscript {
     classpath("com.google.gms:google-services:${Versions.googleService}")
     classpath("com.google.firebase:firebase-crashlytics-gradle:2.4.1")
     classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.3.3")
-    // NOTE: Do not place your application dependencies here; they belong
-    // in the individual module build.gradle files
   }
 }
 
