@@ -99,19 +99,24 @@ android {
 dependencies {
 
   implementation("org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}")
-  implementation("androidx.core:core-ktx:1.3.2")
-  implementation("androidx.appcompat:appcompat:1.2.0")
-  implementation("com.google.android.material:material:1.3.0")
-  implementation("androidx.constraintlayout:constraintlayout:2.0.4")
-  implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.0")
-  implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0")
-  implementation("androidx.navigation:navigation-fragment-ktx:2.3.3")
-  implementation("androidx.navigation:navigation-ui-ktx:2.3.3")
-  implementation("androidx.activity:activity-ktx:1.3.0-alpha02")
-  implementation("androidx.fragment:fragment-ktx:1.3.0")
+
+  implementation("androidx.appcompat:appcompat:${Versions.appcompat}")
+  implementation("com.google.android.material:material:${Versions.material}")
+  implementation("androidx.constraintlayout:constraintlayout:${Versions.constraintlayout}")
+
+  implementation("androidx.core:core-ktx:${Versions.ktx_core}")
+
+  implementation("androidx.lifecycle:lifecycle-livedata-ktx:${Versions.ktx_livedata}")
+  implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.ktx_viewmodel}")
+
+  implementation("androidx.navigation:navigation-fragment-ktx:${Versions.ktx_navigation}")
+  implementation("androidx.navigation:navigation-ui-ktx:${Versions.ktx_navigation}")
+
+  implementation("androidx.activity:activity-ktx:${Versions.ktx_activity}")
+  implementation("androidx.fragment:fragment-ktx:${Versions.ktx_fragment}")
 
   // firebase
-  implementation(platform("com.google.firebase:firebase-bom:26.1.1"))
+  implementation(platform("com.google.firebase:firebase-bom:${Versions.firebase_bom}"))
 //    implementation("com.google.firebase:firebase-crashlytics-ktx")
   implementation("com.google.firebase:firebase-analytics-ktx")
   implementation("com.google.firebase:firebase-config-ktx")
@@ -119,7 +124,6 @@ dependencies {
 
   // dagger hilt
   implementation("com.google.dagger:hilt-android:${Versions.hilt_android}")
-  implementation("androidx.legacy:legacy-support-v4:1.0.0")
   kapt("com.google.dagger:hilt-android-compiler:${Versions.hilt_android}")
 
   // hilt
@@ -133,24 +137,21 @@ dependencies {
   implementation("io.reactivex.rxjava3:rxkotlin:${Versions.rxjava3_rxkotlin}")
   implementation("com.uber.autodispose2:autodispose:${Versions.autodispose}")
 
-  // startup
-  implementation("androidx.startup:startup-runtime:1.0.0")
+  // initializer
+  implementation("androidx.startup:startup-runtime:${Versions.startup}")
 
   // json
-  implementation("com.squareup.moshi:moshi-kotlin:1.11.0")
-  implementation("com.squareup.moshi:moshi:1.11.0")
-  kapt("com.squareup.moshi:moshi-kotlin-codegen:1.11.0")
-  implementation("com.google.code.gson:gson:2.8.6")
+  implementation("com.squareup.moshi:moshi-kotlin:${Versions.moshi}")
+  implementation("com.squareup.moshi:moshi:${Versions.moshi}")
+  kapt("com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi}")
+  implementation("com.google.code.gson:gson:${Versions.gson}")
 
   // rxbinding
-  implementation("com.jakewharton.rxbinding4:rxbinding:4.0.0")
+  implementation("com.jakewharton.rxbinding4:rxbinding:${Versions.rxbinding4}")
 
   // log
-  implementation("com.orhanobut:logger:2.2.0")
-  implementation("com.jakewharton.timber:timber:4.7.1")
-
-  // initializer
-  implementation("androidx.startup:startup-runtime:1.0.0")
+  implementation("com.orhanobut:logger:${Versions.logger}")
+  implementation("com.jakewharton.timber:timber:${Versions.timber}")
 
   // database
   implementation("androidx.room:room-runtime:${Versions.room}")
@@ -162,17 +163,17 @@ dependencies {
   implementation(project(":colorpicker"))
 
   // tutorial
-  implementation("com.github.takusemba:spotlight:2.0.3")
+//  implementation("com.github.takusemba:spotlight:2.0.3")
 
   // datastore
-  implementation("androidx.datastore:datastore-preferences:1.0.0-alpha06")
-
+  implementation("androidx.datastore:datastore-preferences:${Versions.datastore_prefs}")
+`
   // native ad
   implementation(project(":nativetemplates"))
 
-  implementation("com.google.android.gms:play-services-oss-licenses:17.0.0")
+  implementation("com.google.android.gms:play-services-oss-licenses:${Versions.licenses}")
 
-  testImplementation("junit:junit:4.13.1")
-  androidTestImplementation("androidx.test.ext:junit:1.1.2")
-  androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+  testImplementation("junit:junit:${Versions.junit}")
+  androidTestImplementation("androidx.test.ext:junit:${Versions.atsl_junit}")
+  androidTestImplementation("androidx.test.espresso:espresso-core:${Versions.atsl_espresso}")
 }
