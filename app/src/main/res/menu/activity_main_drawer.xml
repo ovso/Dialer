@@ -8,20 +8,5 @@
             android:id="@+id/nav_guide"
             android:icon="@drawable/ic_right_arrow"
             android:title="@string/menu_guide" />
-
-        <item
-            android:id="@+id/nav_opensource_license"
-            android:icon="@drawable/ic_right_arrow"
-            android:title="@string/menu_open_licenses" />
-<!--
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
--->
     </group>
 </menu>
