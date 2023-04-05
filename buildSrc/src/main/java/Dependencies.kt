@@ -1,9 +1,9 @@
 @file:Suppress("SpellCheckingInspection")
 
 object DefaultConfig {
-  const val compileSdk = 30
+  const val compileSdk = 33
   const val minSdk = 23
-  const val targetSdk = 30
+  const val targetSdk = 33
   const val appId = "io.github.ovso.dialer"
   const val versionCode = 2
   const val versionName = "1.0.1"
@@ -11,16 +11,16 @@ object DefaultConfig {
 }
 
 object Versions {
-  const val gradle = "4.2.0-beta04"
+  const val gradle = "7.4.2"
   const val googleService = "4.3.4"
   const val licensesPlugin = "0.10.2"
-  const val kotlin = "1.4.30"
+  const val kotlin = "1.8.10"
   const val material = "1.3.0"
   const val viewpager2 = "1.0.0"
   const val constraintlayout = "2.0.4"
   const val annotation = "1.1.0"
-  const val ktx_livedata = "2.3.0"
-  const val ktx_viewmodel = "2.3.0"
+  const val ktx_livedata = "2.4.0"
+  const val ktx_viewmodel = "2.4.0"
   const val lifecycle = "2.2.0"
   const val ktx_activity = "1.2.0-alpha08"
   const val ktx_fragment = "1.3.0"
@@ -33,7 +33,7 @@ object Versions {
   const val rxbinding4 = "4.0.0"
   const val logger = "2.2.0"
   const val paging = "2.1.2"
-  const val room = "2.2.5"
+  const val room = "2.5.1"
   const val datastore_prefs = "1.0.0-alpha06"
   const val firebase_bom = "26.1.1"
   const val firebase_ads = "19.4.0"

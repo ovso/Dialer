@@ -13,7 +13,7 @@ import com.orhanobut.logger.Logger
 import io.github.ovso.dialer.R
 import io.github.ovso.dialer.view.ui.main.MainActivity2
 
-class SplashActivity : AppCompatActivity() {
+class IntroActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 

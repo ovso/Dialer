@@ -1,5 +1,5 @@
 rootProject.name = "Dialer"
-include("app")
+include(":app")
 include(":colorpicker")
 include(":nativetemplates")
 

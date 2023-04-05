@@ -16,10 +16,11 @@
     android:theme="@style/Theme.Dialer"
     tools:ignore="AllowBackup">
     <activity
-      android:name=".view.ui.splash.SplashActivity"
+      android:name=".view.ui.splash.IntroActivity"
       android:screenOrientation="portrait"
       android:theme="@style/AppTheme.Launcher"
-      tools:ignore="LockedOrientationActivity">
+      tools:ignore="LockedOrientationActivity"
+      android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 

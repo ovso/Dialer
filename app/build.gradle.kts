@@ -7,7 +7,6 @@ plugins {
   id("kotlin-android")
   id("kotlin-kapt")
   id("kotlin-parcelize")
-  id("com.google.android.gms.oss-licenses-plugin")
 //    id("com.google.firebase.crashlytics")
   id("com.google.gms.google-services")
   id("dagger.hilt.android.plugin")
@@ -20,6 +19,7 @@ val keystoreProperties = Properties()
 keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 
 android {
+  namespace = DefaultConfig.appId
   compileSdkVersion(DefaultConfig.compileSdk)
 
   defaultConfig {
@@ -29,7 +29,7 @@ android {
     versionCode = DefaultConfig.versionCode
     versionName = DefaultConfig.versionName
     setProperty("archivesBaseName", "Dialer-$versionName-$versionCode")
-    testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
+//    testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
   }
 
   signingConfigs {
@@ -67,8 +67,8 @@ android {
     }
   }
   compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
   }
 
   buildFeatures {
@@ -77,12 +77,12 @@ android {
   }
 
   compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
   }
 
   kotlinOptions {
-    jvmTarget = "1.8"
+    jvmTarget = "11"
   }
 
   lintOptions {
@@ -94,6 +94,7 @@ android {
     exclude("META-INF/atomicfu.kotlin_module")
     exclude("META-INF/kotlinx-coroutines-io.kotlin_module")
   }
+
 }
 
 dependencies {
@@ -114,7 +115,7 @@ dependencies {
 
   implementation("androidx.activity:activity-ktx:${Versions.ktx_activity}")
   implementation("androidx.fragment:fragment-ktx:${Versions.ktx_fragment}")
-
+  implementation("androidx.work:work-runtime-ktx:2.8.1")
   // firebase
   implementation(platform("com.google.firebase:firebase-bom:${Versions.firebase_bom}"))
 //    implementation("com.google.firebase:firebase-crashlytics-ktx")
@@ -167,11 +168,9 @@ dependencies {
 
   // datastore
   implementation("androidx.datastore:datastore-preferences:${Versions.datastore_prefs}")
-`
   // native ad
   implementation(project(":nativetemplates"))
 
-  implementation("com.google.android.gms:play-services-oss-licenses:${Versions.licenses}")
 
   testImplementation("junit:junit:${Versions.junit}")
   androidTestImplementation("androidx.test.ext:junit:${Versions.atsl_junit}")

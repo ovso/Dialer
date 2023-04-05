@@ -5,7 +5,6 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.orhanobut.logger.Logger
 import io.github.ovso.dialer.data.DialerRepository
-import io.github.ovso.dialer.data.HomeRepository
 import io.github.ovso.dialer.data.args.ARGS
 import io.github.ovso.dialer.data.args.DialerArgs
 import io.github.ovso.dialer.data.local.model.ContactEntity
@@ -14,8 +13,6 @@ import io.github.ovso.dialer.data.mapper.toDialerItemModels
 import io.github.ovso.dialer.data.view.ContactsDialogModel
 import io.github.ovso.dialer.data.view.DialerItemModel
 import io.github.ovso.dialer.extensions.toStringTime
-import io.github.ovso.dialer.utils.rx.RxBus
-import io.github.ovso.dialer.utils.rx.RxBusEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

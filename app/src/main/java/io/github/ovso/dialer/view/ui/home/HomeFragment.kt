@@ -1,7 +1,6 @@
 package io.github.ovso.dialer.view.ui.home
 
 import android.content.DialogInterface
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.addCallback
@@ -11,8 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.google.android.gms.oss.licenses.OssLicensesActivity
-import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.orhanobut.logger.Logger
@@ -133,7 +130,6 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
     val onOkClick = DialogInterface.OnClickListener { dialog, _ ->
       dialog.dismiss()
       listener?.invoke(binding.etGroupAddDialog.text?.trim().toString())
-      showInterstitialAd()
     }
     AlertDialog.Builder(requireContext()).apply {
       setView(binding.root)
@@ -167,9 +163,6 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(R.layout.fragment_
   }
 
   private fun navigateToOpenLicense() {
-    Intent(requireContext(), OssLicensesMenuActivity::class.java).apply {
-      startActivity(this)
-    }
   }
 
   private fun showNativeAdsDialog() {
