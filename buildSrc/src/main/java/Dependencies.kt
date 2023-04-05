@@ -5,8 +5,8 @@ object DefaultConfig {
   const val minSdk = 23
   const val targetSdk = 33
   const val appId = "io.github.ovso.dialer"
-  const val versionCode = 2
-  const val versionName = "1.0.1"
+  const val versionCode = 3
+  const val versionName = "1.0.2"
 
 }
 
