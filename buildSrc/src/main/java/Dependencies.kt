@@ -14,7 +14,7 @@ object Versions {
   const val gradle = "7.4.2"
   const val googleService = "4.3.4"
   const val licensesPlugin = "0.10.2"
-  const val kotlin = "1.8.10"
+  const val kotlin = "1.8.21"
   const val material = "1.3.0"
   const val viewpager2 = "1.0.0"
   const val constraintlayout = "2.0.4"
