@@ -1,12 +1,12 @@
 @file:Suppress("SpellCheckingInspection")
 
 object DefaultConfig {
-  const val compileSdk = 33
+  const val compileSdk = 35
   const val minSdk = 23
-  const val targetSdk = 33
+  const val targetSdk = 35
   const val appId = "io.github.ovso.dialer"
-  const val versionCode = 6
-  const val versionName = "1.0.5"
+  const val versionCode = 7
+  const val versionName = "28.0.0"
 
 }
 
